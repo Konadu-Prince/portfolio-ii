@@ -1,0 +1,79 @@
+body{
+background: url(Nwyriver.jpg);
+font-style: oblique;
+font-size:xx-large;
+}
+
+input{
+    padding: 4px;
+    padding-block:var(sky);
+}
+
+div{
+  color:rgb(251, 253, 255);
+  
+}
+
+.signUpbox {
+    background: rgba(44,62,80,0.7);
+    padding:30px;
+   /* height:auto;*/
+    width:250px;
+    margin-top:120px;
+  /*  margin-down:100px;*/
+    margin-left:auto;
+    margin: 0 auto;
+}
+
+form {
+    width: 240px;
+    text-align:center;
+    margin-top:-10;
+
+}
+
+
+input{
+    width:240px;
+    text-align: center;
+    background: transparent;
+    border:none;
+    border-bottom:2px solid white;
+    font-size:18px;
+    font-weight: 200;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline:none;
+    height: 35px;
+
+    
+}
+
+button{
+   border: none;
+    width:190px;
+    font-size:20px;
+    line-height: 25px;
+    padding:10px 0;
+    border-radius: 25px;
+
+
+}
+
+button:hover {
+    background: black;
+    color:white;
+
+}
+
+h2 {
+    color:gold;
+}
+
+
+
+a:hover {
+   color:cyan
+
+
+}
