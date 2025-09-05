@@ -4,47 +4,998 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form first on sign up project</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Konadu Prince - Cybersecurity Analyst & Software Developer | Professional Portfolio</title>
+    <meta name="description" content="Konadu Prince is a Cybersecurity Analyst, Software Developer, and Cloud Practitioner from UCC. CCNA, Network+ certified professional with expertise in networking, security, and modern technologies.">
+    <meta name="keywords" content="Konadu Prince, cybersecurity analyst, software developer, cloud practitioner, UCC, CCNA, Network+, networking, life coach, youtuber, panisow animations, AI basics, UI/UX design, web developer">
+    <meta name="author" content="Konadu Prince">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Konadu Prince - Cybersecurity Analyst & Software Developer | CCNA, Network+ Certified">
+    <meta property="og:description" content="Cybersecurity Analyst, Software Developer, Cloud Practitioner, and Network Engineer from UCC specializing in modern technologies and security.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:image" content="conadux-logo.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Konadu Prince - Cybersecurity Analyst & Software Developer | CCNA, Network+ Certified">
+    <meta name="twitter:description" content="Cybersecurity Analyst, Software Developer, Cloud Practitioner, and Network Engineer from UCC.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="conadux-logo.png">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="project.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="project.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Konadu Prince",
+      "jobTitle": "Cybersecurity Analyst & Software Developer",
+      "alumniOf": "University of Cape Coast",
+      "knowsAbout": ["Cybersecurity", "Networking", "Software Development", "Cloud Computing", "Network Security", "AWS", "Cisco Technologies"],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "CCNA",
+          "recognizedBy": "Cisco Systems"
+        },
+        {
+          "@type": "EducationalOccupationalCredential", 
+          "credentialCategory": "Network+",
+          "recognizedBy": "CompTIA"
+        }
+      ],
+      "url": "https://yourdomain.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/konadu-prince",
+        "https://youtube.com/@panisowanimations",
+        "https://tiktok.com/@panisowanimations"
+      ]
+    }
+    </script>
 </head>
 <body>
-    <div class="signUpbox">
-        <h2 title="About signUpbox">Sign Up</h2>
-        
-
-        <form action="" >
-        
-            <input type="text" placeholder="First Name" required><br><br>
-
-            <input type="text" placeholder="last Name" required><br><br>
-
-            <input type="password" placeholder="password" required><br><br>
-
-            <input type="password" placeholder="confirm password" required><br><br>
-
-
-            <input type="Number" placeholder="Phone Name" required><br><br>
-
-            <input type="email" placeholder="Enter email" required><br><br>
-
-            <button>Sign Up</button><br><br> 
-
-            <div class="signin">           
-            <p > Already have an account? <a href="index.html"> Login </a></p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">
+                    <i class="fas fa-code"></i>
+                    <span>Konadu Prince</span>
+                </a>
             </div>
-            
-            
-          
-           </form>
-
-            <div class="anchor">
-            <a title="If you have interest in them,see." href="car.png" > see our products </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#expertise" class="nav-link">Expertise</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#certifications" class="nav-link">Certifications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#content" class="nav-link">Content</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
+        </div>
+    </nav>
 
-    </div>
-    <footer>
-        <a style="color:azure;" href="myfirst.html">Next page</a>
-     </footer>
-    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Hi, I'm <span class="highlight">Konadu Prince</span></h1>
+                <h2 class="hero-subtitle">Cybersecurity Analyst & Software Developer</h2>
+                <p class="hero-description">UCC Graduate | CCNA & Network+ Certified | Cloud Practitioner | Life Coach/Advisor | Content Creator. I transform ideas into exceptional digital experiences while helping others grow personally and professionally.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-eye"></i>
+                        <span>View My Work</span>
+                    </a>
+                    <a href="signin.html" class="btn btn-secondary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>View Sign In Demo</span>
+                    </a>
+                    <a href="#" class="btn btn-outline btn-resume">
+                        <i class="fas fa-download"></i>
+                        <span>Download Resume</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">UCC</span>
+                        <span class="stat-label">Graduate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">CCNA</span>
+                        <span class="stat-label">Certified</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Network+</span>
+                        <span class="stat-label">Certified</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="logo-container">
+                    <div class="logo">
+                        <i class="fas fa-code"></i>
+                        <span class="logo-text">Conadux</span>
+                    </div>
+                    <div class="logo-subtitle">Developer</div>
+                </div>
+                <div class="hero-image-decoration">
+                    <div class="tech-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Cybersecurity</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fas fa-network-wired"></i>
+                        <span>Networking</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fas fa-cloud"></i>
+                        <span>Cloud</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fas fa-code"></i>
+                        <span>Development</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">I'm Konadu Prince, a passionate Cybersecurity Analyst and Software Developer from UCC (University of Cape Coast). My journey combines technical expertise with a deep desire to help others grow personally and professionally. I'm certified in CCNA, Network+, and various cloud technologies.</p>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Cybersecurity Expert</h4>
+                                <p>Protecting digital assets and ensuring secure systems with cutting-edge security practices and threat intelligence.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-network-wired"></i>
+                            <div>
+                                <h4>Network Engineer</h4>
+                                <p>CCNA and Network+ certified professional designing and implementing robust network infrastructure solutions.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-cloud"></i>
+                            <div>
+                                <h4>Cloud Practitioner</h4>
+                                <p>Designing and implementing scalable cloud solutions for modern business needs across multiple platforms.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-heart"></i>
+                            <div>
+                                <h4>Life Coach</h4>
+                                <p>Guiding individuals to unlock their potential and achieve personal growth through strategic planning.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>UCC</h3>
+                            <p>University Graduate</p>
+                        </div>
+                        <div class="stat">
+                            <h3>CCNA</h3>
+                            <p>Cisco Certified</p>
+                        </div>
+                        <div class="stat">
+                            <h3>Network+</h3>
+                            <p>CompTIA Certified</p>
+                        </div>
+                        <div class="stat">
+                            <h3>3+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="expertise">
+        <div class="container">
+            <h2 class="section-title">Areas of Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity Analysis</h3>
+                    <p>Comprehensive security assessments, threat analysis, vulnerability management, and security architecture design. Protecting organizations from evolving cyber threats.</p>
+                    <div class="expertise-tags">
+                        <span>Threat Analysis</span>
+                        <span>Vulnerability Assessment</span>
+                        <span>Security Architecture</span>
+                        <span>Incident Response</span>
+                        <span>Penetration Testing</span>
+                        <span>Security Auditing</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Network Engineering</h3>
+                    <p>CCNA and Network+ certified professional specializing in network design, implementation, troubleshooting, and optimization for enterprise environments.</p>
+                    <div class="expertise-tags">
+                        <span>Network Design</span>
+                        <span>Cisco Technologies</span>
+                        <span>Routing & Switching</span>
+                        <span>Network Security</span>
+                        <span>WAN Technologies</span>
+                        <span>Network Troubleshooting</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Software Development</h3>
+                    <p>Full-stack development with modern technologies, creating scalable applications, APIs, and user-friendly interfaces that solve real-world problems.</p>
+                    <div class="expertise-tags">
+                        <span>Full-Stack Development</span>
+                        <span>Web Applications</span>
+                        <span>API Development</span>
+                        <span>Database Design</span>
+                        <span>Mobile Development</span>
+                        <span>DevOps Practices</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Practice</h3>
+                    <p>Cloud infrastructure design, deployment, and management. Expertise in AWS, Azure, and Google Cloud platforms for scalable solutions.</p>
+                    <div class="expertise-tags">
+                        <span>AWS</span>
+                        <span>Azure</span>
+                        <span>Google Cloud</span>
+                        <span>DevOps</span>
+                        <span>Containerization</span>
+                        <span>Infrastructure as Code</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Database Management</h3>
+                    <p>Designing, implementing, and managing database systems including SQL and NoSQL databases for optimal performance and security.</p>
+                    <div class="expertise-tags">
+                        <span>SQL Databases</span>
+                        <span>NoSQL Solutions</span>
+                        <span>Database Security</span>
+                        <span>Performance Optimization</span>
+                        <span>Data Backup</span>
+                        <span>Data Recovery</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Life Coaching & Advice</h3>
+                    <p>Personal development guidance, career counseling, and life strategy planning. Helping individuals unlock their potential and achieve their goals.</p>
+                    <div class="expertise-tags">
+                        <span>Personal Development</span>
+                        <span>Career Guidance</span>
+                        <span>Goal Setting</span>
+                        <span>Motivation</span>
+                        <span>Time Management</span>
+                        <span>Leadership Skills</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Content Creation</h3>
+                    <p>YouTube and TikTok content creation under "Panisow Animations". Sharing knowledge about AI basics, technology insights, and educational content.</p>
+                    <div class="expertise-tags">
+                        <span>YouTube</span>
+                        <span>TikTok</span>
+                        <span>AI Education</span>
+                        <span>Tech Content</span>
+                        <span>Video Editing</span>
+                        <span>Content Strategy</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design principles, creating intuitive interfaces, and enhancing user experiences through thoughtful design and usability testing.</p>
+                    <div class="expertise-tags">
+                        <span>User Research</span>
+                        <span>Wireframing</span>
+                        <span>Prototyping</span>
+                        <span>Usability Testing</span>
+                        <span>Design Systems</span>
+                        <span>Accessibility</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <h2 class="section-title">Professional Certifications</h2>
+            <div class="certifications-grid">
+                <div class="certification-card cisco">
+                    <div class="certification-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>CCNA (Cisco Certified Network Associate)</h3>
+                    <p>Comprehensive networking certification covering routing, switching, security, and automation. Demonstrates expertise in Cisco technologies and network fundamentals.</p>
+                    <div class="certification-details">
+                        <span><i class="fas fa-calendar"></i> Valid: 2024-2027</span>
+                        <span><i class="fas fa-award"></i> Cisco Systems</span>
+                    </div>
+                    <div class="certification-skills">
+                        <span>Network Fundamentals</span>
+                        <span>Routing & Switching</span>
+                        <span>Network Security</span>
+                        <span>Automation</span>
+                    </div>
+                </div>
+
+                <div class="certification-card comptia">
+                    <div class="certification-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Network+ (CompTIA Network+)</h3>
+                    <p>Industry-recognized certification validating essential networking skills and knowledge. Covers network infrastructure, operations, security, and troubleshooting.</p>
+                    <div class="certification-details">
+                        <span><i class="fas fa-calendar"></i> Valid: 2024-2027</span>
+                        <span><i class="fas fa-award"></i> CompTIA</span>
+                    </div>
+                    <div class="certification-skills">
+                        <span>Network Infrastructure</span>
+                        <span>Network Operations</span>
+                        <span>Network Security</span>
+                        <span>Troubleshooting</span>
+                    </div>
+                </div>
+
+                <div class="certification-card aws">
+                    <div class="certification-icon">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <h3>AWS Cloud Practitioner</h3>
+                    <p>Foundational cloud certification demonstrating knowledge of AWS Cloud concepts, services, security, architecture, pricing, and support.</p>
+                    <div class="certification-details">
+                        <span><i class="fas fa-calendar"></i> Valid: 2024-2027</span>
+                        <span><i class="fas fa-award"></i> Amazon Web Services</span>
+                    </div>
+                    <div class="certification-skills">
+                        <span>Cloud Concepts</span>
+                        <span>AWS Services</span>
+                        <span>Security & Compliance</span>
+                        <span>Cloud Architecture</span>
+                    </div>
+                </div>
+
+                <div class="certification-card cybersecurity">
+                    <div class="certification-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity Fundamentals</h3>
+                    <p>Comprehensive understanding of cybersecurity principles, threat detection, incident response, and security best practices for modern organizations.</p>
+                    <div class="certification-details">
+                        <span><i class="fas fa-calendar"></i> Valid: 2024-2027</span>
+                        <span><i class="fas fa-award"></i> Industry Standard</span>
+                    </div>
+                    <div class="certification-skills">
+                        <span>Threat Detection</span>
+                        <span>Incident Response</span>
+                        <span>Security Policies</span>
+                        <span>Risk Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="networking">Networking</button>
+                <button class="filter-btn" data-filter="web">Web Apps</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+                <button class="filter-btn" data-filter="ui">UI/UX</button>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card" data-category="networking">
+                    <div class="project-image">
+                        <img src="car.png" alt="Network Infrastructure Design" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links-overlay">
+                                <a href="#projects" class="btn btn-small" onclick="showProjectDetails('network-infrastructure')">View Details</a>
+                                <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectDocumentation('network-infrastructure')">Documentation</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Enterprise Network Infrastructure</h3>
+                        <p>Designed and implemented a scalable enterprise network infrastructure using Cisco technologies, including VLANs, routing protocols, and network security measures.</p>
+                        <div class="project-tech">
+                            <span>Cisco IOS</span>
+                            <span>VLANs</span>
+                            <span>OSPF</span>
+                            <span>Network Security</span>
+                            <span>Monitoring</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#projects" class="btn btn-small" onclick="showProjectDetails('network-infrastructure')">View Details</a>
+                            <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectDocumentation('network-infrastructure')">Documentation</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="security">
+                    <div class="project-image">
+                        <img src="sky.jpg" alt="Security Assessment Tool" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links-overlay">
+                                <a href="#projects" class="btn btn-small" onclick="showProjectDemo('security-tool')">Live Demo</a>
+                                <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectSource('security-tool')">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Network Security Assessment Tool</h3>
+                        <p>A comprehensive security assessment tool for analyzing network vulnerabilities, performing penetration testing, and generating detailed security reports.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Nmap</span>
+                            <span>Metasploit</span>
+                            <span>Security APIs</span>
+                            <span>Report Generation</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#projects" class="btn btn-small" onclick="showProjectDemo('security-tool')">Live Demo</a>
+                            <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectSource('security-tool')">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="Nwyriver.jpg" alt="E-commerce Platform" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links-overlay">
+                                <a href="#projects" class="btn btn-small" onclick="showProjectDemo('ecommerce')">Live Demo</a>
+                                <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectSource('ecommerce')">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-commerce Platform</h3>
+                        <p>A modern, scalable e-commerce solution with advanced features including payment processing, inventory management, and analytics dashboard.</p>
+                        <div class="project-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>React</span>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#projects" class="btn btn-small" onclick="showProjectDemo('ecommerce')">Live Demo</a>
+                            <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectSource('ecommerce')">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="cloud">
+                    <div class="project-image">
+                        <img src="ghflag.jpeg" alt="Cloud Infrastructure" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links-overlay">
+                                <a href="#projects" class="btn btn-small" onclick="showProjectDetails('cloud-infrastructure')">View Details</a>
+                                <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectArchitecture('cloud-infrastructure')">Architecture</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Multi-Cloud Infrastructure</h3>
+                        <p>Designed and deployed a hybrid cloud infrastructure using AWS and Azure, implementing infrastructure as code and automated deployment pipelines.</p>
+                        <div class="project-tech">
+                            <span>AWS</span>
+                            <span>Azure</span>
+                            <span>Terraform</span>
+                            <span>Docker</span>
+                            <span>CI/CD</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#projects" class="btn btn-small" onclick="showProjectDetails('cloud-infrastructure')">View Details</a>
+                            <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectArchitecture('cloud-infrastructure')">Architecture</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <div class="project-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links-overlay">
+                                <a href="signin.html" class="btn btn-small">Live Demo</a>
+                                <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectSource('auth-system')">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Modern Authentication System</h3>
+                        <p>A professional authentication system featuring secure login, social media integration, password recovery, and modern UI design.</p>
+                        <div class="project-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Form Validation</span>
+                            <span>OAuth</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="signin.html" class="btn btn-small">Live Demo</a>
+                            <a href="#projects" class="btn btn-small btn-outline" onclick="showProjectSource('auth-system')">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Networking & Infrastructure</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Cisco Technologies</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-server"></i>
+                            <span>Network Design</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Network Security</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-tools"></i>
+                            <span>Network Troubleshooting</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Cybersecurity & Security</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Threat Analysis</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-bug"></i>
+                            <span>Vulnerability Assessment</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-lock"></i>
+                            <span>Security Architecture</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-search"></i>
+                            <span>Penetration Testing</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Development & Cloud</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-aws"></i>
+                            <span>AWS Cloud</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Design & Content</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-palette"></i>
+                            <span>UI/UX Design</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-video"></i>
+                            <span>Video Editing</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-robot"></i>
+                            <span>AI Basics</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Life Coaching</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Creation Section -->
+    <section id="content" class="content">
+        <div class="container">
+            <h2 class="section-title">Content Creation & Social Media</h2>
+            <div class="content-grid">
+                <div class="content-card youtube">
+                    <div class="content-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <h3>Panisow Animations</h3>
+                    <p>Educational content about AI basics, technology insights, cybersecurity tips, and software development tutorials. Making complex topics accessible to everyone.</p>
+                    <div class="content-features">
+                        <span>AI Education</span>
+                        <span>Tech Tutorials</span>
+                        <span>Cybersecurity Tips</span>
+                        <span>Software Development</span>
+                    </div>
+                    <a href="https://youtube.com/@panisowanimations" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                        <span>Visit Channel</span>
+                    </a>
+                </div>
+
+                <div class="content-card tiktok">
+                    <div class="content-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <h3>TikTok Content</h3>
+                    <p>Short-form educational content, tech tips, and motivational content. Quick insights and knowledge sharing in an engaging format.</p>
+                    <div class="content-features">
+                        <span>Quick Tips</span>
+                        <span>Tech Insights</span>
+                        <span>Motivation</span>
+                        <span>Education</span>
+                    </div>
+                    <a href="https://tiktok.com/@panisowanimations" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        <span>Follow on TikTok</span>
+                    </a>
+                </div>
+
+                <div class="content-card coaching">
+                    <div class="content-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Life Coaching & Advice</h3>
+                    <p>Personal development guidance, career counseling, and life strategy planning. Helping individuals unlock their potential and achieve their goals.</p>
+                    <div class="content-features">
+                        <span>Personal Development</span>
+                        <span>Career Guidance</span>
+                        <span>Goal Setting</span>
+                        <span>Motivation</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        <span>Get Coaching</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What People Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Konadu's expertise in cybersecurity and networking is exceptional. He helped us implement robust security measures that protected our entire infrastructure."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <span>IT Director, TechCorp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Working with Konadu on our cloud migration was a game-changer. His knowledge of AWS and Azure made the transition seamless and secure."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Michael Chen</h4>
+                                <span>CTO, StartupXYZ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Konadu's life coaching sessions helped me overcome career obstacles and develop a clear path forward. His guidance was invaluable."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Emily Rodriguez</h4>
+                                <span>Software Engineer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Work Together</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Ready to start your next project?</h3>
+                    <p>I'm always excited to work on new challenges and bring innovative ideas to life. Whether you need cybersecurity services, network infrastructure, software development, cloud solutions, or life coaching, I'd love to hear from you.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="contact-label">Email</span>
+                                <span class="contact-value">konaduprince26@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <span class="contact-label">LinkedIn</span>
+                                <span class="contact-value">konadu-prince</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <span class="contact-label">Education</span>
+                                <span class="contact-value">UCC Graduate</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="contact-label">Location</span>
+                                <span class="contact-value">Ghana</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <span class="contact-label">Available</span>
+                                <span class="contact-value">Mon-Fri, 9AM-6PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="">Select Service</option>
+                            <option value="cybersecurity">Cybersecurity Services</option>
+                            <option value="networking">Network Infrastructure</option>
+                            <option value="development">Software Development</option>
+                            <option value="cloud">Cloud Solutions</option>
+                            <option value="coaching">Life Coaching</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Tell me about your project or how I can help..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-code"></i>
+                        Konadu Prince
+                    </h3>
+                    <p>Cybersecurity Analyst, Network Engineer, Software Developer, Cloud Practitioner, and Life Coach. Creating digital experiences that matter.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#expertise">Expertise</a></li>
+                        <li><a href="#certifications">Certifications</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#content">Content</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="https://youtube.com/@panisowanimations" aria-label="YouTube Channel" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@panisowanimations" aria-label="TikTok Profile" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.linkedin.com/in/konadu-prince" aria-label="LinkedIn Profile" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/konaduprince" aria-label="GitHub Profile" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Konadu Prince. All rights reserved. | UCC Graduate | CCNA & Network+ Certified | Built with ❤️ and modern web technologies</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

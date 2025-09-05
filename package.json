@@ -1,0 +1,43 @@
+{
+  "name": "konadu-prince-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Konadu Prince - Cybersecurity Analyst, Software Developer, and Cloud Practitioner",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'No build process needed for static site'",
+    "serve": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "portfolio",
+    "cybersecurity",
+    "software-development",
+    "cloud-computing",
+    "networking",
+    "web-development",
+    "konadu-prince",
+    "ucc",
+    "ccna",
+    "network-plus"
+  ],
+  "author": {
+    "name": "Konadu Prince",
+    "email": "konaduprince26@gmail.com",
+    "url": "https://linkedin.com/in/konadu-prince"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Konadu-Prince/konadu-prince-portfolio.git"
+  },
+  "homepage": "https://konadu-prince.github.io/konadu-prince-portfolio",
+  "bugs": {
+    "url": "https://github.com/Konadu-Prince/konadu-prince-portfolio/issues"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
