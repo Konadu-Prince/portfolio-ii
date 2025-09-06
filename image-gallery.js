@@ -34,15 +34,62 @@ class ImageGallery {
     }
     
     loadExistingImages() {
-        // Load existing images from the page
-        const imageItems = document.querySelectorAll('.image-item img');
-        this.images = Array.from(imageItems).map((img, index) => ({
-            src: img.src,
-            alt: img.alt,
-            title: `Image ${index + 1}`,
-            description: `Description for ${img.alt}`,
-            category: 'portfolio'
-        }));
+        // First, try to load saved images from localStorage
+        const savedImages = localStorage.getItem('galleryImages');
+        if (savedImages) {
+            this.images = JSON.parse(savedImages);
+            this.renderImagesFromData();
+        } else {
+            // Load existing images from the page (default images)
+            const imageItems = document.querySelectorAll('.image-item img');
+            this.images = Array.from(imageItems).map((img, index) => ({
+                id: `default_${index}`,
+                src: img.src,
+                alt: img.alt,
+                title: `Image ${index + 1}`,
+                description: `Description for ${img.alt}`,
+                category: 'portfolio',
+                dateAdded: new Date().toISOString()
+            }));
+            this.saveImages();
+        }
+    }
+    
+    renderImagesFromData() {
+        const grid = document.getElementById('imageGrid');
+        grid.innerHTML = '';
+        
+        this.images.forEach(image => {
+            const imageItem = this.createImageItem(image);
+            grid.appendChild(imageItem);
+        });
+    }
+    
+    createImageItem(image) {
+        const imageItem = document.createElement('div');
+        imageItem.className = 'image-item';
+        imageItem.setAttribute('data-category', image.category);
+        imageItem.setAttribute('data-image-id', image.id);
+        
+        imageItem.innerHTML = `
+            <img src="${image.src}" alt="${image.alt}" loading="lazy">
+            <div class="image-overlay">
+                <div class="image-actions">
+                    <button class="btn-icon" onclick="gallery.viewImage('${image.src}')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn-icon admin-only" onclick="gallery.deleteImageById('${image.id}')" style="display: none;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        return imageItem;
+    }
+    
+    saveImages() {
+        localStorage.setItem('galleryImages', JSON.stringify(this.images));
     }
     
     loadVideos() {
@@ -181,6 +228,25 @@ class ImageGallery {
             this.handleAdminLogout();
         });
         
+        // Backup controls
+        document.getElementById('exportDataBtn').addEventListener('click', () => {
+            this.exportGalleryData();
+        });
+        
+        document.getElementById('importDataBtn').addEventListener('click', () => {
+            document.getElementById('importDataInput').click();
+        });
+        
+        document.getElementById('importDataInput').addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                this.importGalleryData(e.target.files[0]);
+            }
+        });
+        
+        document.getElementById('clearDataBtn').addEventListener('click', () => {
+            this.clearAllData();
+        });
+        
         document.getElementById('generateLink').addEventListener('click', () => {
             this.generatePrivateLink();
         });
@@ -259,14 +325,17 @@ class ImageGallery {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const newImage = {
+                        id: `uploaded_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
                         src: e.target.result,
                         alt: file.name,
                         title: file.name.split('.')[0],
                         description: `Uploaded image: ${file.name}`,
-                        category: 'uploaded'
+                        category: 'uploaded',
+                        dateAdded: new Date().toISOString()
                     };
                     
                     this.images.push(newImage);
+                    this.saveImages(); // Save to localStorage
                     this.addImageToGrid(newImage);
                     this.updateSlideshow();
                     
@@ -280,24 +349,7 @@ class ImageGallery {
     
     addImageToGrid(image) {
         const grid = document.getElementById('imageGrid');
-        const imageItem = document.createElement('div');
-        imageItem.className = 'image-item';
-        imageItem.setAttribute('data-category', image.category);
-        
-        imageItem.innerHTML = `
-            <img src="${image.src}" alt="${image.alt}" loading="lazy">
-            <div class="image-overlay">
-                <div class="image-actions">
-                    <button class="btn-icon" onclick="gallery.viewImage('${image.src}')">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="btn-icon" onclick="gallery.deleteImage(this)">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-        `;
-        
+        const imageItem = this.createImageItem(image);
         grid.appendChild(imageItem);
     }
     
@@ -325,21 +377,35 @@ class ImageGallery {
         }
         
         const imageItem = button.closest('.image-item');
-        const img = imageItem.querySelector('img');
-        const src = img.src;
+        const imageId = imageItem.getAttribute('data-image-id');
         
         if (confirm('Are you sure you want to delete this image?')) {
-            // Remove from images array
-            this.images = this.images.filter(img => img.src !== src);
-            
-            // Remove from DOM
-            imageItem.remove();
-            
-            // Update slideshow if needed
-            this.updateSlideshow();
-            
-            this.showNotification('Image deleted successfully!', 'success');
+            this.deleteImageById(imageId);
         }
+    }
+    
+    deleteImageById(imageId) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to delete images', 'error');
+            return;
+        }
+        
+        // Remove from images array
+        this.images = this.images.filter(img => img.id !== imageId);
+        
+        // Save updated images to localStorage
+        this.saveImages();
+        
+        // Remove from DOM
+        const imageItem = document.querySelector(`[data-image-id="${imageId}"]`);
+        if (imageItem) {
+            imageItem.remove();
+        }
+        
+        // Update slideshow if needed
+        this.updateSlideshow();
+        
+        this.showNotification('Image deleted successfully!', 'success');
     }
     
     togglePublicAccess(isPublic) {
@@ -420,6 +486,119 @@ class ImageGallery {
             adminElements.forEach(element => {
                 element.style.display = 'none';
             });
+        }
+    }
+    
+    // ========================================
+    // DATA PERSISTENCE & BACKUP
+    // ========================================
+    
+    exportGalleryData() {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to export data', 'error');
+            return;
+        }
+        
+        const galleryData = {
+            images: this.images,
+            videos: this.videos,
+            profilePicture: document.getElementById('profilePicture').src,
+            settings: {
+                showProfilePicture: this.showProfilePicture,
+                isPublic: this.isPublic
+            },
+            exportDate: new Date().toISOString(),
+            version: '1.0'
+        };
+        
+        const dataStr = JSON.stringify(galleryData, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = `gallery-backup-${new Date().toISOString().split('T')[0]}.json`;
+        link.click();
+        
+        this.showNotification('Gallery data exported successfully!', 'success');
+    }
+    
+    importGalleryData(file) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to import data', 'error');
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const galleryData = JSON.parse(e.target.result);
+                
+                if (galleryData.version && galleryData.images && galleryData.videos) {
+                    // Import images
+                    this.images = galleryData.images;
+                    this.saveImages();
+                    
+                    // Import videos
+                    this.videos = galleryData.videos;
+                    this.featuredVideos = this.videos.filter(video => video.isFeatured);
+                    this.saveVideos();
+                    
+                    // Import profile picture
+                    if (galleryData.profilePicture) {
+                        document.getElementById('profilePicture').src = galleryData.profilePicture;
+                        this.saveProfilePicture();
+                    }
+                    
+                    // Import settings
+                    if (galleryData.settings) {
+                        this.showProfilePicture = galleryData.settings.showProfilePicture;
+                        this.isPublic = galleryData.settings.isPublic;
+                        document.getElementById('profilePictureToggle').checked = this.showProfilePicture;
+                        document.getElementById('publicToggle').checked = this.isPublic;
+                        this.updateProfilePictureVisibility();
+                    }
+                    
+                    // Refresh the display
+                    this.renderImagesFromData();
+                    this.updateSlideshow();
+                    this.updateYouTubeDashboard();
+                    
+                    this.showNotification('Gallery data imported successfully!', 'success');
+                } else {
+                    this.showNotification('Invalid backup file format', 'error');
+                }
+            } catch (error) {
+                this.showNotification('Error importing backup file', 'error');
+                console.error('Import error:', error);
+            }
+        };
+        reader.readAsText(file);
+    }
+    
+    clearAllData() {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to clear data', 'error');
+            return;
+        }
+        
+        if (confirm('Are you sure you want to clear ALL gallery data? This cannot be undone!')) {
+            // Clear localStorage
+            localStorage.removeItem('galleryImages');
+            localStorage.removeItem('galleryVideos');
+            localStorage.removeItem('galleryProfilePicture');
+            localStorage.removeItem('galleryProfilePictureSettings');
+            localStorage.removeItem('galleryAdminSession');
+            
+            // Reset to defaults
+            this.images = [];
+            this.videos = [];
+            this.featuredVideos = [];
+            this.isAdmin = false;
+            this.showProfilePicture = true;
+            this.isPublic = false;
+            
+            // Reload page to reset everything
+            window.location.reload();
         }
     }
     
@@ -1002,6 +1181,10 @@ function viewImage(src) {
 
 function deleteImage(button) {
     gallery.deleteImage(button);
+}
+
+function deleteImageById(imageId) {
+    gallery.deleteImageById(imageId);
 }
 
 // YouTube Dashboard Global Functions
