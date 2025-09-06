@@ -266,6 +266,12 @@ class ImageGallery {
             });
         }
         
+        // Navigation functionality
+        this.initNavigation();
+        
+        // Contact form functionality
+        this.initContactForm();
+        
         // Profile click to show admin login
         const profileIconContainer = document.querySelector('.profile-icon-container');
         const adminLoginSection = document.getElementById('adminLoginSection');
@@ -555,6 +561,111 @@ class ImageGallery {
         // Show YouTube dashboard button if there are videos
         if (youtubeDashboardBtn) {
             youtubeDashboardBtn.style.display = this.videos.length > 0 ? 'block' : 'none';
+        }
+    }
+    
+    // ========================================
+    // NAVIGATION FUNCTIONALITY
+    // ========================================
+    
+    initNavigation() {
+        // Handle navigation links
+        document.querySelectorAll('.gallery-navbar .nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                
+                if (href && href.includes('#')) {
+                    e.preventDefault();
+                    const sectionId = href.split('#')[1];
+                    
+                    if (sectionId === 'home' || sectionId === 'about' || sectionId === 'projects' || 
+                        sectionId === 'contact' || sectionId === 'expertise' || sectionId === 'certifications') {
+                        // Navigate to main portfolio page
+                        window.location.href = `index.html#${sectionId}`;
+                    }
+                }
+            });
+        });
+    }
+    
+    initContactForm() {
+        // Initialize EmailJS with configuration
+        const config = this.getEmailConfig();
+        if (config.PUBLIC_KEY && config.PUBLIC_KEY !== "YOUR_PUBLIC_KEY_HERE") {
+            emailjs.init(config.PUBLIC_KEY);
+        }
+        
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleContactFormSubmit(contactForm);
+            });
+        }
+    }
+    
+    getEmailConfig() {
+        // Return email configuration
+        return {
+            PUBLIC_KEY: "YOUR_PUBLIC_KEY_HERE", // Replace with your EmailJS public key
+            SERVICE_ID: "YOUR_SERVICE_ID_HERE", // Replace with your EmailJS service ID
+            TEMPLATE_ID: "YOUR_TEMPLATE_ID_HERE", // Replace with your EmailJS template ID
+            TO_EMAIL: "konaduprince26@gmail.com"
+        };
+    }
+    
+    async handleContactFormSubmit(form) {
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        const config = this.getEmailConfig();
+        
+        try {
+            // Check if EmailJS is configured
+            if (config.PUBLIC_KEY === "YOUR_PUBLIC_KEY_HERE" || 
+                config.SERVICE_ID === "YOUR_SERVICE_ID_HERE" || 
+                config.TEMPLATE_ID === "YOUR_TEMPLATE_ID_HERE") {
+                throw new Error('EmailJS not configured. Please set up your EmailJS credentials.');
+            }
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Get form data
+            const formData = new FormData(form);
+            const templateParams = {
+                from_name: formData.get('name'),
+                from_email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message'),
+                to_email: config.TO_EMAIL
+            };
+            
+            // Send email using EmailJS
+            const response = await emailjs.send(
+                config.SERVICE_ID,
+                config.TEMPLATE_ID,
+                templateParams
+            );
+            
+            if (response.status === 200) {
+                this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                form.reset();
+            } else {
+                throw new Error('Failed to send message');
+            }
+            
+        } catch (error) {
+            console.error('Error sending email:', error);
+            if (error.message.includes('EmailJS not configured')) {
+                this.showNotification('Email service not configured. Please contact me directly at konaduprince26@gmail.com', 'error');
+            } else {
+                this.showNotification('Failed to send message. Please try again or contact me directly.', 'error');
+            }
+        } finally {
+            // Reset button state
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
         }
     }
     
