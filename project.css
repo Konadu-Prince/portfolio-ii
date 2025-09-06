@@ -1830,6 +1830,64 @@ body {
     border-radius: 1px;
 }
 
+/* Condux Branding */
+.developer-branding {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.developer-branding p {
+    margin: 0;
+    color: #bdc3c7;
+    font-size: 0.9rem;
+}
+
+.condux-brand {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.condux-brand:hover {
+    color: #f39c12;
+    text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+}
+
+.condux-brand::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #3498db, #f39c12);
+    transition: width 0.3s ease;
+}
+
+.condux-brand:hover::after {
+    width: 100%;
+}
+
+.condux-logo-small {
+    height: 25px;
+    width: auto;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    filter: brightness(0.9);
+}
+
+.condux-logo-small:hover {
+    opacity: 1;
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .container {
@@ -2265,5 +2323,15 @@ body {
     .sidebar-link {
         padding: 12px 15px;
         font-size: 0.9rem;
+    }
+    
+    .developer-branding {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .condux-logo-small {
+        height: 20px;
     }
 }
