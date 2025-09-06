@@ -39,11 +39,26 @@
         <!-- Gallery Header -->
         <section class="gallery-header">
             <div class="container">
-                <h1 class="gallery-title">
-                    <i class="fas fa-images"></i>
-                    Image Gallery
-                </h1>
-                <p class="gallery-subtitle">Private collection with controlled access</p>
+                <div class="gallery-header-content">
+                    <div class="profile-picture-section" id="profilePictureSection">
+                        <div class="profile-picture-container">
+                            <img src="logo.png" alt="Profile Picture" id="profilePicture" class="profile-picture">
+                            <div class="profile-picture-overlay">
+                                <input type="file" id="profilePictureUpload" accept="image/*" style="display: none;">
+                                <button class="btn btn-upload" id="uploadProfilePicture">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-title-section">
+                        <h1 class="gallery-title">
+                            <i class="fas fa-images"></i>
+                            Image Gallery
+                        </h1>
+                        <p class="gallery-subtitle">Private collection with controlled access</p>
+                    </div>
+                </div>
                 
                 <!-- Privacy Controls -->
                 <div class="privacy-controls">
@@ -53,6 +68,13 @@
                             <span class="slider"></span>
                         </label>
                         <span class="privacy-label">Public Access</span>
+                    </div>
+                    <div class="profile-picture-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="profilePictureToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="privacy-label">Show Profile Picture</span>
                     </div>
                     <div class="link-access">
                         <button class="btn btn-secondary" id="generateLink">

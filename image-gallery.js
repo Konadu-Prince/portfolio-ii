@@ -13,6 +13,7 @@ class ImageGallery {
         this.videos = [];
         this.featuredVideos = [];
         this.currentTab = 'featured';
+        this.showProfilePicture = true;
         
         this.init();
     }
@@ -20,6 +21,7 @@ class ImageGallery {
     init() {
         this.loadExistingImages();
         this.loadVideos();
+        this.loadProfilePicture();
         this.bindEvents();
         this.initScrollToTop();
         this.initMobileMenu();
@@ -72,6 +74,33 @@ class ImageGallery {
         localStorage.setItem('galleryVideos', JSON.stringify(this.videos));
     }
     
+    loadProfilePicture() {
+        // Load profile picture settings from localStorage
+        const savedProfilePicture = localStorage.getItem('galleryProfilePicture');
+        const savedProfilePictureSettings = localStorage.getItem('galleryProfilePictureSettings');
+        
+        if (savedProfilePicture) {
+            document.getElementById('profilePicture').src = savedProfilePicture;
+        }
+        
+        if (savedProfilePictureSettings) {
+            const settings = JSON.parse(savedProfilePictureSettings);
+            this.showProfilePicture = settings.showProfilePicture;
+            document.getElementById('profilePictureToggle').checked = this.showProfilePicture;
+            this.updateProfilePictureVisibility();
+        }
+    }
+    
+    saveProfilePicture() {
+        const profilePicture = document.getElementById('profilePicture').src;
+        const settings = {
+            showProfilePicture: this.showProfilePicture
+        };
+        
+        localStorage.setItem('galleryProfilePicture', profilePicture);
+        localStorage.setItem('galleryProfilePictureSettings', JSON.stringify(settings));
+    }
+    
     bindEvents() {
         // View toggle buttons
         document.getElementById('gridView').addEventListener('click', () => this.showGridView());
@@ -90,6 +119,19 @@ class ImageGallery {
         // Privacy controls
         document.getElementById('publicToggle').addEventListener('change', (e) => {
             this.togglePublicAccess(e.target.checked);
+        });
+        
+        document.getElementById('profilePictureToggle').addEventListener('change', (e) => {
+            this.toggleProfilePictureVisibility(e.target.checked);
+        });
+        
+        // Profile picture upload
+        document.getElementById('uploadProfilePicture').addEventListener('click', () => {
+            document.getElementById('profilePictureUpload').click();
+        });
+        
+        document.getElementById('profilePictureUpload').addEventListener('change', (e) => {
+            this.handleProfilePictureUpload(e.target.files[0]);
         });
         
         document.getElementById('generateLink').addEventListener('click', () => {
@@ -247,6 +289,38 @@ class ImageGallery {
         this.isPublic = isPublic;
         const message = isPublic ? 'Gallery is now public' : 'Gallery is now private';
         this.showNotification(message, 'info');
+    }
+    
+    toggleProfilePictureVisibility(show) {
+        this.showProfilePicture = show;
+        this.updateProfilePictureVisibility();
+        this.saveProfilePicture();
+        
+        const message = show ? 'Profile picture is now visible' : 'Profile picture is now hidden';
+        this.showNotification(message, 'info');
+    }
+    
+    updateProfilePictureVisibility() {
+        const profilePictureSection = document.getElementById('profilePictureSection');
+        if (this.showProfilePicture) {
+            profilePictureSection.style.display = 'flex';
+        } else {
+            profilePictureSection.style.display = 'none';
+        }
+    }
+    
+    handleProfilePictureUpload(file) {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('profilePicture').src = e.target.result;
+                this.saveProfilePicture();
+                this.showNotification('Profile picture updated successfully!', 'success');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            this.showNotification('Please select a valid image file', 'error');
+        }
     }
     
     generatePrivateLink() {
