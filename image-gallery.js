@@ -415,6 +415,11 @@ class ImageGallery {
     }
     
     toggleProfilePictureVisibility(show) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to change profile picture settings', 'error');
+            return;
+        }
+        
         this.showProfilePicture = show;
         this.updateProfilePictureVisibility();
         this.saveProfilePicture();
@@ -433,6 +438,11 @@ class ImageGallery {
     }
     
     handleProfilePictureUpload(file) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to change profile picture', 'error');
+            return;
+        }
+        
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = (e) => {
