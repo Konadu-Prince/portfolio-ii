@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konadu Prince - Image Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="image-gallery.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Konadu Prince</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="youtube-showcase.html" class="nav-link">YouTube</a></li>
+                <li><a href="image-gallery.html" class="nav-link active">Gallery</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="gallery-main">
+        <!-- Gallery Header -->
+        <section class="gallery-header">
+            <div class="container">
+                <h1 class="gallery-title">
+                    <i class="fas fa-images"></i>
+                    Image Gallery
+                </h1>
+                <p class="gallery-subtitle">Private collection with controlled access</p>
+                
+                <!-- Privacy Controls -->
+                <div class="privacy-controls">
+                    <div class="privacy-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="publicToggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="privacy-label">Public Access</span>
+                    </div>
+                    <div class="link-access">
+                        <button class="btn btn-secondary" id="generateLink">
+                            <i class="fas fa-link"></i>
+                            Generate Private Link
+                        </button>
+                        <div class="link-display" id="linkDisplay" style="display: none;">
+                            <input type="text" id="privateLink" readonly>
+                            <button class="btn btn-copy" id="copyLink">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Controls -->
+        <section class="gallery-controls">
+            <div class="container">
+                <div class="controls-row">
+                    <div class="view-options">
+                        <button class="btn btn-primary active" id="gridView">
+                            <i class="fas fa-th"></i>
+                            Grid View
+                        </button>
+                        <button class="btn btn-secondary" id="slideshowView">
+                            <i class="fas fa-play"></i>
+                            Slideshow
+                        </button>
+                    </div>
+                    <div class="upload-section">
+                        <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;">
+                        <button class="btn btn-success" id="uploadBtn">
+                            <i class="fas fa-upload"></i>
+                            Upload Images
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-grid-section" id="galleryGrid">
+            <div class="container">
+                <div class="gallery-grid" id="imageGrid">
+                    <!-- Images will be dynamically loaded here -->
+                    <div class="image-item" data-category="portfolio">
+                        <img src="car.png" alt="Portfolio Image 1" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="image-actions">
+                                <button class="btn-icon" onclick="viewImage('car.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="deleteImage(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-item" data-category="portfolio">
+                        <img src="sky.jpg" alt="Portfolio Image 2" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="image-actions">
+                                <button class="btn-icon" onclick="viewImage('sky.jpg')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="deleteImage(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-item" data-category="portfolio">
+                        <img src="Nwyriver.jpg" alt="Portfolio Image 3" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="image-actions">
+                                <button class="btn-icon" onclick="viewImage('Nwyriver.jpg')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="deleteImage(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-item" data-category="portfolio">
+                        <img src="ghflag.jpeg" alt="Portfolio Image 4" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="image-actions">
+                                <button class="btn-icon" onclick="viewImage('ghflag.jpeg')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="deleteImage(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slideshow Section -->
+        <section class="slideshow-section" id="slideshowSection" style="display: none;">
+            <div class="container">
+                <div class="slideshow-container">
+                    <div class="slideshow-header">
+                        <h3>Image Slideshow</h3>
+                        <div class="slideshow-controls">
+                            <button class="btn btn-primary" id="playPauseBtn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn btn-secondary" id="prevBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-secondary" id="nextBtn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <span class="slide-counter">
+                                <span id="currentSlide">1</span> / <span id="totalSlides">4</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="slideshow-wrapper">
+                        <div class="slide" id="slideContainer">
+                            <img id="slideImage" src="car.png" alt="Slide Image">
+                            <div class="slide-info">
+                                <h4 id="slideTitle">Image Title</h4>
+                                <p id="slideDescription">Image description goes here</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slideshow-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="slide-thumbnails" id="slideThumbnails">
+                            <!-- Thumbnails will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img id="modalImage" src="" alt="Full size image">
+            <div class="modal-info">
+                <h3 id="modalTitle">Image Title</h3>
+                <p id="modalDescription">Image description</p>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        Download
+                    </button>
+                    <button class="btn btn-secondary" id="shareBtn">
+                        <i class="fas fa-share"></i>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="gallery-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Konadu Prince</h4>
+                    <p>Network Engineer & Developer</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fas fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Portfolio</a></li>
+                        <li><a href="youtube-showcase.html">YouTube</a></li>
+                        <li><a href="signin.html">Live Demo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>konaduprince26@gmail.com</p>
+                    <p>+233 24 123 4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Konadu Prince. All rights reserved. | UCC Graduate | CCNA & Network+ Certified</p>
+                <div class="developer-branding">
+                    <p>Developed by <a href="#" class="conadux-brand">Conadux</a></p>
+                    <img src="condux-logo.png" alt="Conadux Development" class="condux-logo-small">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="image-gallery.js"></script>
+</body>
+</html>
