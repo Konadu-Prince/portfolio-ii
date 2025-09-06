@@ -785,9 +785,11 @@ input:checked + .slider:before {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
     padding: 20px 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .image-item {
@@ -1216,6 +1218,9 @@ input:checked + .slider:before {
     border-radius: 20px;
     padding: 40px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
 }
 
 .dashboard-header {
@@ -1301,8 +1306,10 @@ input:checked + .slider:before {
 
 .featured-videos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .featured-video-item {
@@ -1716,6 +1723,12 @@ input:checked + .slider:before {
     .controls-row {
         flex-direction: column;
         align-items: stretch;
+        gap: 15px;
+    }
+    
+    .controls-row .btn {
+        width: 100%;
+        margin-bottom: 10px;
     }
     
     .view-options {
@@ -1850,5 +1863,160 @@ input:checked + .slider:before {
     
     .modal-info {
         padding: 20px;
+    }
+    
+    /* Dashboard Mobile Improvements */
+    .dashboard-container {
+        padding: 15px;
+    }
+    
+    .dashboard-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-tabs {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .dashboard-tabs .tab-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .featured-videos-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .featured-video-item {
+        margin-bottom: 15px;
+    }
+    
+    .video-info h5 {
+        font-size: 1rem;
+    }
+    
+    .video-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .video-actions {
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .upload-form {
+        padding: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-row .form-group {
+        width: 100%;
+    }
+    
+    .analytics-dashboard {
+        padding: 15px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+    }
+}
+
+/* Tablet Responsive Styles */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .featured-videos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .dashboard-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .dashboard-tabs .tab-btn {
+        flex: 1;
+        min-width: 150px;
+    }
+    
+    .form-row {
+        flex-direction: row;
+    }
+    
+    .form-row .form-group {
+        flex: 1;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    .gallery-header {
+        padding: 40px 0;
+    }
+    
+    .gallery-title {
+        font-size: 2rem;
+    }
+    
+    .gallery-subtitle {
+        font-size: 1rem;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    .dashboard-container {
+        padding: 10px;
+    }
+    
+    .featured-video-item {
+        padding: 10px;
+    }
+    
+    .video-thumbnail img {
+        height: 150px;
+    }
+    
+    .upload-form {
+        padding: 10px;
+    }
+    
+    .analytics-dashboard {
+        padding: 10px;
+    }
+    
+    .stat-card {
+        padding: 10px;
+    }
+    
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
     }
 }

@@ -1310,4 +1310,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('publicToggle').checked = false;
         gallery.isPublic = false;
     }
+    
+    // Handle window resize for better responsiveness
+    window.addEventListener('resize', throttle(() => {
+        // Update dashboard visibility on resize
+        if (gallery) {
+            gallery.updateAdminVisibility();
+        }
+    }, 250));
 });
