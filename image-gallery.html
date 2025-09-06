@@ -145,7 +145,7 @@
                             <i class="fas fa-play"></i>
                             Slideshow
                         </button>
-                        <button class="btn btn-secondary admin-only" id="youtubeDashboardView" style="display: none;">
+                        <button class="btn btn-secondary" id="youtubeDashboardView">
                             <i class="fab fa-youtube"></i>
                             YouTube Dashboard
                         </button>
@@ -267,7 +267,7 @@
         </section>
 
         <!-- YouTube Dashboard Section -->
-        <section class="youtube-dashboard-section admin-only" id="youtubeDashboardSection" style="display: none;">
+        <section class="youtube-dashboard-section" id="youtubeDashboardSection" style="display: none;">
             <div class="container">
                 <div class="dashboard-container">
                     <div class="dashboard-header">
@@ -284,11 +284,11 @@
                             <i class="fas fa-star"></i>
                             Featured Videos
                         </button>
-                        <button class="tab-btn" data-tab="upload">
+                        <button class="tab-btn admin-only" data-tab="upload" style="display: none;">
                             <i class="fas fa-upload"></i>
                             Add New Video
                         </button>
-                        <button class="tab-btn" data-tab="analytics">
+                        <button class="tab-btn admin-only" data-tab="analytics" style="display: none;">
                             <i class="fas fa-chart-bar"></i>
                             Analytics
                         </button>
@@ -339,7 +339,7 @@
                     </div>
 
                     <!-- Upload New Video Tab -->
-                    <div class="tab-content" id="uploadTab">
+                    <div class="tab-content admin-only" id="uploadTab" style="display: none;">
                         <div class="upload-form">
                             <h4>Add New YouTube Video</h4>
                             <form id="videoUploadForm">
@@ -400,7 +400,7 @@
                     </div>
 
                     <!-- Analytics Tab -->
-                    <div class="tab-content" id="analyticsTab">
+                    <div class="tab-content admin-only" id="analyticsTab" style="display: none;">
                         <div class="analytics-dashboard">
                             <h4>Video Analytics</h4>
                             

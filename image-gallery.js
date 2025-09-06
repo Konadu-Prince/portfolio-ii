@@ -534,6 +534,7 @@ class ImageGallery {
         const adminElements = document.querySelectorAll('.admin-only');
         const loginSection = document.getElementById('adminLoginSection');
         const privacyControls = document.getElementById('privacyControls');
+        const youtubeDashboardBtn = document.getElementById('youtubeDashboardView');
         
         if (this.isAdmin) {
             // Show admin controls, hide login
@@ -549,6 +550,11 @@ class ImageGallery {
             adminElements.forEach(element => {
                 element.style.display = 'none';
             });
+        }
+        
+        // Show YouTube dashboard button if there are videos
+        if (youtubeDashboardBtn) {
+            youtubeDashboardBtn.style.display = this.videos.length > 0 ? 'block' : 'none';
         }
     }
     
@@ -946,8 +952,9 @@ class ImageGallery {
     // ========================================
     
     showYouTubeDashboard() {
-        if (!this.isAdmin) {
-            this.showNotification('Admin access required to access YouTube dashboard', 'error');
+        // Allow access if there are videos, but restrict admin functions
+        if (this.videos.length === 0) {
+            this.showNotification('No videos available to display', 'info');
             return;
         }
         
@@ -1012,6 +1019,12 @@ class ImageGallery {
     updateYouTubeDashboard() {
         this.updateFeaturedVideos();
         this.updateAnalytics();
+        
+        // Update admin-only elements visibility within dashboard
+        const adminOnlyElements = document.querySelectorAll('#youtubeDashboardSection .admin-only');
+        adminOnlyElements.forEach(element => {
+            element.style.display = this.isAdmin ? 'block' : 'none';
+        });
     }
     
     updateFeaturedVideos() {
@@ -1045,7 +1058,7 @@ class ImageGallery {
                     <span class="views"><i class="fas fa-eye"></i> ${this.formatNumber(video.views)} views</span>
                     <span class="duration"><i class="fas fa-clock"></i> ${video.duration}</span>
                 </div>
-                <div class="video-actions">
+                <div class="video-actions admin-only" style="display: ${this.isAdmin ? 'flex' : 'none'};">
                     <button class="btn-icon" onclick="gallery.editVideo('${video.id}')">
                         <i class="fas fa-edit"></i>
                     </button>
