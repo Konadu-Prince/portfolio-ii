@@ -266,6 +266,40 @@ class ImageGallery {
             });
         }
         
+        // Profile click to show admin login
+        const profileIconContainer = document.querySelector('.profile-icon-container');
+        const adminLoginSection = document.getElementById('adminLoginSection');
+        
+        if (profileIconContainer && adminLoginSection) {
+            profileIconContainer.addEventListener('click', (e) => {
+                // Only show login if not already admin
+                if (!this.isAdmin) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Toggle admin login visibility
+                    if (adminLoginSection.style.display === 'none' || adminLoginSection.style.display === '') {
+                        adminLoginSection.style.display = 'block';
+                        // Focus on password input
+                        setTimeout(() => {
+                            document.getElementById('adminPassword').focus();
+                        }, 100);
+                    } else {
+                        adminLoginSection.style.display = 'none';
+                    }
+                }
+            });
+        }
+        
+        // Close admin login when clicking outside
+        document.addEventListener('click', (e) => {
+            if (adminLoginSection && adminLoginSection.style.display === 'block') {
+                if (!adminLoginSection.contains(e.target) && !profileIconContainer.contains(e.target)) {
+                    adminLoginSection.style.display = 'none';
+                }
+            }
+        });
+        
         document.getElementById('generateLink').addEventListener('click', () => {
             this.generatePrivateLink();
         });
@@ -509,8 +543,8 @@ class ImageGallery {
                 element.style.display = element.style.display === 'none' ? 'none' : 'block';
             });
         } else {
-            // Hide admin controls, show login
-            loginSection.style.display = 'block';
+            // Hide admin controls, hide login (login only shows on profile click)
+            loginSection.style.display = 'none';
             privacyControls.style.display = 'none';
             adminElements.forEach(element => {
                 element.style.display = 'none';

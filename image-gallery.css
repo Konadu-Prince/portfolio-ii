@@ -1738,20 +1738,33 @@ input:checked + .slider:before {
     }
     
     #slideImage {
-        height: 300px;
+        height: 250px;
+        max-height: 250px;
+    }
+    
+    .slideshow-wrapper {
+        max-height: 300px;
+        overflow: hidden;
     }
     
     .modal-content {
         width: 95%;
-        margin: 10% auto;
+        margin: 5% auto;
+        max-height: 90vh;
+        overflow-y: auto;
     }
     
     #modalImage {
-        height: 50vh;
+        height: 40vh;
+        max-height: 300px;
     }
     
     .modal-actions {
         flex-direction: column;
+    }
+    
+    .image-modal {
+        padding: 10px;
     }
     
     .footer-content {
