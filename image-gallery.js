@@ -14,6 +14,8 @@ class ImageGallery {
         this.featuredVideos = [];
         this.currentTab = 'featured';
         this.showProfilePicture = true;
+        this.isAdmin = false;
+        this.adminPassword = 'admin123'; // Change this to your desired password
         
         this.init();
     }
@@ -22,11 +24,13 @@ class ImageGallery {
         this.loadExistingImages();
         this.loadVideos();
         this.loadProfilePicture();
+        this.checkAdminSession();
         this.bindEvents();
         this.initScrollToTop();
         this.initMobileMenu();
         this.updateSlideshow();
         this.initYouTubeDashboard();
+        this.updateAdminVisibility();
     }
     
     loadExistingImages() {
@@ -101,6 +105,34 @@ class ImageGallery {
         localStorage.setItem('galleryProfilePictureSettings', JSON.stringify(settings));
     }
     
+    checkAdminSession() {
+        // Check if admin session is still valid
+        const adminSession = localStorage.getItem('galleryAdminSession');
+        if (adminSession) {
+            const sessionData = JSON.parse(adminSession);
+            const now = new Date().getTime();
+            // Session expires after 24 hours
+            if (now - sessionData.timestamp < 24 * 60 * 60 * 1000) {
+                this.isAdmin = true;
+            } else {
+                localStorage.removeItem('galleryAdminSession');
+            }
+        }
+    }
+    
+    saveAdminSession() {
+        const sessionData = {
+            timestamp: new Date().getTime(),
+            isAdmin: true
+        };
+        localStorage.setItem('galleryAdminSession', JSON.stringify(sessionData));
+    }
+    
+    clearAdminSession() {
+        localStorage.removeItem('galleryAdminSession');
+        this.isAdmin = false;
+    }
+    
     bindEvents() {
         // View toggle buttons
         document.getElementById('gridView').addEventListener('click', () => this.showGridView());
@@ -132,6 +164,21 @@ class ImageGallery {
         
         document.getElementById('profilePictureUpload').addEventListener('change', (e) => {
             this.handleProfilePictureUpload(e.target.files[0]);
+        });
+        
+        // Admin authentication
+        document.getElementById('adminLoginBtn').addEventListener('click', () => {
+            this.handleAdminLogin();
+        });
+        
+        document.getElementById('adminPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.handleAdminLogin();
+            }
+        });
+        
+        document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+            this.handleAdminLogout();
         });
         
         document.getElementById('generateLink').addEventListener('click', () => {
@@ -202,6 +249,11 @@ class ImageGallery {
     }
     
     handleImageUpload(files) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to upload images', 'error');
+            return;
+        }
+        
         Array.from(files).forEach(file => {
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
@@ -267,6 +319,11 @@ class ImageGallery {
     }
     
     deleteImage(button) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to delete images', 'error');
+            return;
+        }
+        
         const imageItem = button.closest('.image-item');
         const img = imageItem.querySelector('img');
         const src = img.src;
@@ -320,6 +377,49 @@ class ImageGallery {
             reader.readAsDataURL(file);
         } else {
             this.showNotification('Please select a valid image file', 'error');
+        }
+    }
+    
+    handleAdminLogin() {
+        const password = document.getElementById('adminPassword').value;
+        
+        if (password === this.adminPassword) {
+            this.isAdmin = true;
+            this.saveAdminSession();
+            this.updateAdminVisibility();
+            document.getElementById('adminPassword').value = '';
+            this.showNotification('Admin access granted!', 'success');
+        } else {
+            this.showNotification('Invalid password. Access denied.', 'error');
+            document.getElementById('adminPassword').value = '';
+        }
+    }
+    
+    handleAdminLogout() {
+        this.clearAdminSession();
+        this.updateAdminVisibility();
+        this.showNotification('Logged out successfully', 'info');
+    }
+    
+    updateAdminVisibility() {
+        const adminElements = document.querySelectorAll('.admin-only');
+        const loginSection = document.getElementById('adminLoginSection');
+        const privacyControls = document.getElementById('privacyControls');
+        
+        if (this.isAdmin) {
+            // Show admin controls, hide login
+            loginSection.style.display = 'none';
+            privacyControls.style.display = 'block';
+            adminElements.forEach(element => {
+                element.style.display = element.style.display === 'none' ? 'none' : 'block';
+            });
+        } else {
+            // Hide admin controls, show login
+            loginSection.style.display = 'block';
+            privacyControls.style.display = 'none';
+            adminElements.forEach(element => {
+                element.style.display = 'none';
+            });
         }
     }
     
@@ -604,6 +704,11 @@ class ImageGallery {
     // ========================================
     
     showYouTubeDashboard() {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to access YouTube dashboard', 'error');
+            return;
+        }
+        
         document.getElementById('galleryGrid').style.display = 'none';
         document.getElementById('slideshowSection').style.display = 'none';
         document.getElementById('youtubeDashboardSection').style.display = 'block';
@@ -716,6 +821,11 @@ class ImageGallery {
     }
     
     addVideo() {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to add videos', 'error');
+            return;
+        }
+        
         const url = document.getElementById('videoUrl').value;
         const title = document.getElementById('videoTitle').value;
         const description = document.getElementById('videoDescription').value;

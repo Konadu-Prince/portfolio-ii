@@ -233,6 +233,101 @@ body {
 }
 
 /* ========================================
+   ADMIN AUTHENTICATION
+   ======================================== */
+
+.admin-login-section {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.admin-login-form h3 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.admin-login-form h3 i {
+    color: #f39c12;
+}
+
+.admin-login-form p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+}
+
+.login-form {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    min-width: 250px;
+    transition: all 0.3s ease;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #3498db;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.login-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-hint {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-header h4 {
+    color: white;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.admin-header h4 i {
+    color: #f39c12;
+}
+
+.admin-only {
+    transition: all 0.3s ease;
+}
+
+/* ========================================
    PRIVACY CONTROLS
    ======================================== */
 
@@ -1299,6 +1394,23 @@ input:checked + .slider:before {
     .privacy-controls {
         flex-direction: column;
         gap: 20px;
+    }
+    
+    /* Admin Login Mobile */
+    .login-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .login-form input {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
     }
     
     .controls-row {
