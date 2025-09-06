@@ -1109,6 +1109,11 @@ class ImageGallery {
     }
     
     editVideo(videoId) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to edit videos', 'error');
+            return;
+        }
+        
         const video = this.videos.find(v => v.id === videoId);
         if (video) {
             // Populate form with video data
@@ -1125,6 +1130,11 @@ class ImageGallery {
     }
     
     removeFeatured(videoId) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to modify featured videos', 'error');
+            return;
+        }
+        
         if (confirm('Are you sure you want to remove this video from featured?')) {
             const video = this.videos.find(v => v.id === videoId);
             if (video) {
@@ -1138,6 +1148,11 @@ class ImageGallery {
     }
     
     reorderVideo(videoId, direction) {
+        if (!this.isAdmin) {
+            this.showNotification('Admin access required to reorder videos', 'error');
+            return;
+        }
+        
         const index = this.featuredVideos.findIndex(v => v.id === videoId);
         if (index !== -1) {
             if (direction === 'up' && index > 0) {
