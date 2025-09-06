@@ -247,6 +247,25 @@ class ImageGallery {
             this.clearAllData();
         });
         
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.gallery-navbar .hamburger');
+        const navMenu = document.querySelector('.gallery-navbar .nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('.gallery-navbar .nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+        }
+        
         document.getElementById('generateLink').addEventListener('click', () => {
             this.generatePrivateLink();
         });

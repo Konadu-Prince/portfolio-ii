@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar gallery-navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="index.html">
@@ -26,6 +26,17 @@
                 <li><a href="youtube-showcase.html" class="nav-link">YouTube</a></li>
                 <li><a href="image-gallery.html" class="nav-link active">Gallery</a></li>
             </ul>
+            <div class="navbar-profile">
+                <div class="profile-icon-container" id="profilePictureSection">
+                    <img src="logo.png" alt="Profile" id="profilePicture" class="profile-icon">
+                    <div class="profile-overlay admin-only">
+                        <input type="file" id="profilePictureUpload" accept="image/*" style="display: none;">
+                        <button class="btn-profile-upload" id="uploadProfilePicture">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -40,17 +51,6 @@
         <section class="gallery-header">
             <div class="container">
                 <div class="gallery-header-content">
-                    <div class="profile-picture-section" id="profilePictureSection">
-                        <div class="profile-picture-container">
-                            <img src="logo.png" alt="Profile Picture" id="profilePicture" class="profile-picture">
-                            <div class="profile-picture-overlay admin-only">
-                                <input type="file" id="profilePictureUpload" accept="image/*" style="display: none;">
-                                <button class="btn btn-upload" id="uploadProfilePicture">
-                                    <i class="fas fa-camera"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     <div class="gallery-title-section">
                         <h1 class="gallery-title">
                             <i class="fas fa-images"></i>
