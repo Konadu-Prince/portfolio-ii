@@ -2208,3 +2208,117 @@ class InteractiveFeatures {
 
 // Initialize interactive features
 const interactiveFeatures = new InteractiveFeatures();
+
+// ========================================
+// ENHANCED NAVIGATION FEATURES
+// ========================================
+
+// Active Navigation Highlighting
+function updateActiveNavigation() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    
+    // Update navbar links
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Update sidebar links
+    sidebarLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === currentSection) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Scroll to Top Functionality
+function initScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
+// Sidebar Navigation Functionality
+function initSidebar() {
+    const sidebarNav = document.getElementById('sidebarNav');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    
+    if (sidebarNav && sidebarToggle && sidebarClose) {
+        // Toggle sidebar
+        sidebarToggle.addEventListener('click', () => {
+            sidebarNav.classList.add('active');
+        });
+        
+        // Close sidebar
+        sidebarClose.addEventListener('click', () => {
+            sidebarNav.classList.remove('active');
+        });
+        
+        // Close sidebar when clicking on links
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebarNav.classList.remove('active');
+            });
+        });
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebarNav.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                sidebarNav.classList.remove('active');
+            }
+        });
+        
+        // Close sidebar on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                sidebarNav.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Initialize enhanced navigation features
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize new navigation features
+    initScrollToTop();
+    initSidebar();
+    
+    // Update active navigation on scroll
+    window.addEventListener('scroll', updateActiveNavigation);
+    
+    // Initial call to set active navigation
+    updateActiveNavigation();
+});
