@@ -2220,21 +2220,33 @@ function updateActiveNavigation() {
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
     
     let currentSection = '';
+    let currentOffset = window.scrollY + 150; // Offset for better detection
     
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
+        const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
+        const sectionBottom = sectionTop + sectionHeight;
         
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        // Check if current scroll position is within this section
+        if (currentOffset >= sectionTop && currentOffset < sectionBottom) {
             currentSection = section.getAttribute('id');
         }
     });
     
+    // If no section is found, check if we're at the very top
+    if (!currentSection && window.scrollY < 200) {
+        currentSection = 'home';
+    }
+    
     // Update navbar links
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
+        const href = link.getAttribute('href');
+        if (href && href.includes('#')) {
+            const sectionId = href.split('#')[1];
+            if (sectionId === currentSection) {
+                link.classList.add('active');
+            }
         }
     });
     
@@ -2310,14 +2322,28 @@ function initSidebar() {
     }
 }
 
+// Throttle function for better performance
+function throttle(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // Initialize enhanced navigation features
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize new navigation features
     initScrollToTop();
     initSidebar();
     
-    // Update active navigation on scroll
-    window.addEventListener('scroll', updateActiveNavigation);
+    // Update active navigation on scroll with throttling
+    const throttledUpdateNavigation = throttle(updateActiveNavigation, 100);
+    window.addEventListener('scroll', throttledUpdateNavigation);
     
     // Initial call to set active navigation
     updateActiveNavigation();
