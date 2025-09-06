@@ -258,5 +258,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Scroll to Top Functionality
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Navbar Active Link Highlighting
+    function updateActiveNavLink() {
+        const currentPage = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            
+            // Highlight based on current page
+            if (currentPage.includes('signin.html')) {
+                // For signin page, we could highlight a specific section
+                // For now, we'll highlight the home link as it's the main page
+                if (link.getAttribute('href') === 'index.html#home') {
+                    link.classList.add('active');
+                }
+            }
+        });
+    }
+
+    // Initialize navbar highlighting
+    updateActiveNavLink();
 });
 
