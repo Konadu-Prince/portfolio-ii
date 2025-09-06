@@ -10,16 +10,21 @@ class ImageGallery {
         this.isPlaying = false;
         this.isPublic = false;
         this.privateLink = null;
+        this.videos = [];
+        this.featuredVideos = [];
+        this.currentTab = 'featured';
         
         this.init();
     }
     
     init() {
         this.loadExistingImages();
+        this.loadVideos();
         this.bindEvents();
         this.initScrollToTop();
         this.initMobileMenu();
         this.updateSlideshow();
+        this.initYouTubeDashboard();
     }
     
     loadExistingImages() {
@@ -34,10 +39,44 @@ class ImageGallery {
         }));
     }
     
+    loadVideos() {
+        // Load existing videos from localStorage or initialize with sample data
+        const savedVideos = localStorage.getItem('galleryVideos');
+        if (savedVideos) {
+            this.videos = JSON.parse(savedVideos);
+        } else {
+            // Sample video data
+            this.videos = [
+                {
+                    id: 'sample1',
+                    title: 'Sample Featured Video',
+                    description: 'This is a sample video description',
+                    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                    videoId: 'dQw4w9WgXcQ',
+                    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+                    category: 'tutorial',
+                    tags: ['sample', 'demo', 'video'],
+                    views: 1200000,
+                    duration: '3:32',
+                    isFeatured: true,
+                    dateAdded: new Date().toISOString()
+                }
+            ];
+            this.saveVideos();
+        }
+        
+        this.featuredVideos = this.videos.filter(video => video.isFeatured);
+    }
+    
+    saveVideos() {
+        localStorage.setItem('galleryVideos', JSON.stringify(this.videos));
+    }
+    
     bindEvents() {
         // View toggle buttons
         document.getElementById('gridView').addEventListener('click', () => this.showGridView());
         document.getElementById('slideshowView').addEventListener('click', () => this.showSlideshowView());
+        document.getElementById('youtubeDashboardView').addEventListener('click', () => this.showYouTubeDashboard());
         
         // Upload functionality
         document.getElementById('uploadBtn').addEventListener('click', () => {
@@ -485,6 +524,291 @@ class ImageGallery {
             });
         });
     }
+    
+    // ========================================
+    // YOUTUBE DASHBOARD FUNCTIONALITY
+    // ========================================
+    
+    showYouTubeDashboard() {
+        document.getElementById('galleryGrid').style.display = 'none';
+        document.getElementById('slideshowSection').style.display = 'none';
+        document.getElementById('youtubeDashboardSection').style.display = 'block';
+        
+        document.getElementById('gridView').classList.remove('active');
+        document.getElementById('slideshowView').classList.remove('active');
+        document.getElementById('youtubeDashboardView').classList.add('active');
+        
+        this.stopSlideshow();
+        this.updateYouTubeDashboard();
+    }
+    
+    initYouTubeDashboard() {
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.getAttribute('data-tab');
+                this.switchTab(tab);
+            });
+        });
+        
+        // Video upload form
+        document.getElementById('videoUploadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.addVideo();
+        });
+        
+        // Preview video button
+        document.getElementById('previewVideo').addEventListener('click', () => {
+            this.previewVideo();
+        });
+        
+        // Add featured video button
+        document.getElementById('addFeaturedBtn').addEventListener('click', () => {
+            this.switchTab('upload');
+        });
+    }
+    
+    switchTab(tabName) {
+        // Update tab buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        
+        // Update tab content
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        document.getElementById(`${tabName}Tab`).classList.add('active');
+        
+        this.currentTab = tabName;
+        
+        if (tabName === 'analytics') {
+            this.updateAnalytics();
+        }
+    }
+    
+    updateYouTubeDashboard() {
+        this.updateFeaturedVideos();
+        this.updateAnalytics();
+    }
+    
+    updateFeaturedVideos() {
+        const grid = document.getElementById('featuredVideosGrid');
+        grid.innerHTML = '';
+        
+        this.featuredVideos.forEach(video => {
+            const videoItem = this.createVideoItem(video);
+            grid.appendChild(videoItem);
+        });
+    }
+    
+    createVideoItem(video) {
+        const item = document.createElement('div');
+        item.className = 'featured-video-item';
+        item.setAttribute('data-video-id', video.id);
+        
+        item.innerHTML = `
+            <div class="video-thumbnail">
+                <img src="${video.thumbnail}" alt="${video.title}">
+                <div class="video-overlay">
+                    <button class="play-btn" onclick="gallery.playVideo('${video.videoId}')">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="video-info">
+                <h5>${video.title}</h5>
+                <p>${video.description}</p>
+                <div class="video-meta">
+                    <span class="views"><i class="fas fa-eye"></i> ${this.formatNumber(video.views)} views</span>
+                    <span class="duration"><i class="fas fa-clock"></i> ${video.duration}</span>
+                </div>
+                <div class="video-actions">
+                    <button class="btn-icon" onclick="gallery.editVideo('${video.id}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon" onclick="gallery.removeFeatured('${video.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="btn-icon" onclick="gallery.reorderVideo('${video.id}', 'up')">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        return item;
+    }
+    
+    addVideo() {
+        const url = document.getElementById('videoUrl').value;
+        const title = document.getElementById('videoTitle').value;
+        const description = document.getElementById('videoDescription').value;
+        const category = document.getElementById('videoCategory').value;
+        const tags = document.getElementById('videoTags').value.split(',').map(tag => tag.trim());
+        const isFeatured = document.getElementById('featuredVideo').checked;
+        
+        // Extract video ID from URL
+        const videoId = this.extractVideoId(url);
+        if (!videoId) {
+            this.showNotification('Invalid YouTube URL', 'error');
+            return;
+        }
+        
+        const video = {
+            id: Date.now().toString(),
+            title: title,
+            description: description,
+            url: url,
+            videoId: videoId,
+            thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+            category: category,
+            tags: tags,
+            views: Math.floor(Math.random() * 1000000),
+            duration: this.generateRandomDuration(),
+            isFeatured: isFeatured,
+            dateAdded: new Date().toISOString()
+        };
+        
+        this.videos.push(video);
+        if (isFeatured) {
+            this.featuredVideos.push(video);
+        }
+        
+        this.saveVideos();
+        this.updateYouTubeDashboard();
+        this.clearVideoForm();
+        
+        this.showNotification('Video added successfully!', 'success');
+    }
+    
+    extractVideoId(url) {
+        const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+    }
+    
+    generateRandomDuration() {
+        const minutes = Math.floor(Math.random() * 10) + 1;
+        const seconds = Math.floor(Math.random() * 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    clearVideoForm() {
+        document.getElementById('videoUploadForm').reset();
+    }
+    
+    previewVideo() {
+        const url = document.getElementById('videoUrl').value;
+        const videoId = this.extractVideoId(url);
+        
+        if (videoId) {
+            const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            window.open(embedUrl, '_blank');
+        } else {
+            this.showNotification('Please enter a valid YouTube URL first', 'error');
+        }
+    }
+    
+    playVideo(videoId) {
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        window.open(embedUrl, '_blank');
+    }
+    
+    editVideo(videoId) {
+        const video = this.videos.find(v => v.id === videoId);
+        if (video) {
+            // Populate form with video data
+            document.getElementById('videoUrl').value = video.url;
+            document.getElementById('videoTitle').value = video.title;
+            document.getElementById('videoDescription').value = video.description;
+            document.getElementById('videoCategory').value = video.category;
+            document.getElementById('videoTags').value = video.tags.join(', ');
+            document.getElementById('featuredVideo').checked = video.isFeatured;
+            
+            this.switchTab('upload');
+            this.showNotification('Video data loaded for editing', 'info');
+        }
+    }
+    
+    removeFeatured(videoId) {
+        if (confirm('Are you sure you want to remove this video from featured?')) {
+            const video = this.videos.find(v => v.id === videoId);
+            if (video) {
+                video.isFeatured = false;
+                this.featuredVideos = this.featuredVideos.filter(v => v.id !== videoId);
+                this.saveVideos();
+                this.updateYouTubeDashboard();
+                this.showNotification('Video removed from featured', 'success');
+            }
+        }
+    }
+    
+    reorderVideo(videoId, direction) {
+        const index = this.featuredVideos.findIndex(v => v.id === videoId);
+        if (index !== -1) {
+            if (direction === 'up' && index > 0) {
+                [this.featuredVideos[index], this.featuredVideos[index - 1]] = 
+                [this.featuredVideos[index - 1], this.featuredVideos[index]];
+            } else if (direction === 'down' && index < this.featuredVideos.length - 1) {
+                [this.featuredVideos[index], this.featuredVideos[index + 1]] = 
+                [this.featuredVideos[index + 1], this.featuredVideos[index]];
+            }
+            
+            this.updateFeaturedVideos();
+            this.showNotification('Video order updated', 'success');
+        }
+    }
+    
+    updateAnalytics() {
+        const totalViews = this.videos.reduce((sum, video) => sum + video.views, 0);
+        const totalVideos = this.videos.length;
+        const featuredCount = this.featuredVideos.length;
+        const totalLikes = Math.floor(totalViews * 0.05); // Estimate likes as 5% of views
+        
+        document.getElementById('totalViews').textContent = this.formatNumber(totalViews);
+        document.getElementById('totalVideos').textContent = totalVideos;
+        document.getElementById('featuredCount').textContent = featuredCount;
+        document.getElementById('totalLikes').textContent = this.formatNumber(totalLikes);
+        
+        this.updateRecentVideos();
+    }
+    
+    updateRecentVideos() {
+        const recentVideosList = document.getElementById('recentVideosList');
+        recentVideosList.innerHTML = '';
+        
+        const recentVideos = this.videos
+            .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
+            .slice(0, 5);
+        
+        recentVideos.forEach(video => {
+            const item = document.createElement('div');
+            item.className = 'recent-video-item';
+            
+            item.innerHTML = `
+                <div class="recent-video-thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                </div>
+                <div class="recent-video-info">
+                    <h6>${video.title}</h6>
+                    <p>${this.formatNumber(video.views)} views • ${video.duration}</p>
+                </div>
+            `;
+            
+            recentVideosList.appendChild(item);
+        });
+    }
+    
+    formatNumber(num) {
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(1) + 'M';
+        } else if (num >= 1000) {
+            return (num / 1000).toFixed(1) + 'K';
+        }
+        return num.toString();
+    }
 }
 
 // Global functions for onclick handlers
@@ -494,6 +818,23 @@ function viewImage(src) {
 
 function deleteImage(button) {
     gallery.deleteImage(button);
+}
+
+// YouTube Dashboard Global Functions
+function playVideo(videoId) {
+    gallery.playVideo(videoId);
+}
+
+function editVideo(videoId) {
+    gallery.editVideo(videoId);
+}
+
+function removeFeatured(videoId) {
+    gallery.removeFeatured(videoId);
+}
+
+function reorderVideo(videoId, direction) {
+    gallery.reorderVideo(videoId, direction);
 }
 
 // Initialize gallery when DOM is loaded

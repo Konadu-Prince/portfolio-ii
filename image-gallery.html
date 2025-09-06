@@ -83,6 +83,10 @@
                             <i class="fas fa-play"></i>
                             Slideshow
                         </button>
+                        <button class="btn btn-secondary" id="youtubeDashboardView">
+                            <i class="fab fa-youtube"></i>
+                            YouTube Dashboard
+                        </button>
                     </div>
                     <div class="upload-section">
                         <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;">
@@ -194,6 +198,198 @@
                         </div>
                         <div class="slide-thumbnails" id="slideThumbnails">
                             <!-- Thumbnails will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- YouTube Dashboard Section -->
+        <section class="youtube-dashboard-section" id="youtubeDashboardSection" style="display: none;">
+            <div class="container">
+                <div class="dashboard-container">
+                    <div class="dashboard-header">
+                        <h3>
+                            <i class="fab fa-youtube"></i>
+                            YouTube Content Management
+                        </h3>
+                        <p>Manage your featured YouTube videos and content</p>
+                    </div>
+
+                    <!-- Video Management Tabs -->
+                    <div class="dashboard-tabs">
+                        <button class="tab-btn active" data-tab="featured">
+                            <i class="fas fa-star"></i>
+                            Featured Videos
+                        </button>
+                        <button class="tab-btn" data-tab="upload">
+                            <i class="fas fa-upload"></i>
+                            Add New Video
+                        </button>
+                        <button class="tab-btn" data-tab="analytics">
+                            <i class="fas fa-chart-bar"></i>
+                            Analytics
+                        </button>
+                    </div>
+
+                    <!-- Featured Videos Tab -->
+                    <div class="tab-content active" id="featuredTab">
+                        <div class="featured-videos-header">
+                            <h4>Featured Videos</h4>
+                            <button class="btn btn-primary" id="addFeaturedBtn">
+                                <i class="fas fa-plus"></i>
+                                Add Featured Video
+                            </button>
+                        </div>
+                        
+                        <div class="featured-videos-grid" id="featuredVideosGrid">
+                            <!-- Featured videos will be loaded here -->
+                            <div class="featured-video-item" data-video-id="sample1">
+                                <div class="video-thumbnail">
+                                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sample Video">
+                                    <div class="video-overlay">
+                                        <button class="play-btn" onclick="playVideo('dQw4w9WgXcQ')">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="video-info">
+                                    <h5>Sample Featured Video</h5>
+                                    <p>This is a sample video description</p>
+                                    <div class="video-meta">
+                                        <span class="views"><i class="fas fa-eye"></i> 1.2M views</span>
+                                        <span class="duration"><i class="fas fa-clock"></i> 3:32</span>
+                                    </div>
+                                    <div class="video-actions">
+                                        <button class="btn-icon" onclick="editVideo('sample1')">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="removeFeatured('sample1')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="reorderVideo('sample1', 'up')">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload New Video Tab -->
+                    <div class="tab-content" id="uploadTab">
+                        <div class="upload-form">
+                            <h4>Add New YouTube Video</h4>
+                            <form id="videoUploadForm">
+                                <div class="form-group">
+                                    <label for="videoUrl">YouTube Video URL</label>
+                                    <input type="url" id="videoUrl" placeholder="https://www.youtube.com/watch?v=..." required>
+                                    <small>Paste the YouTube video URL here</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="videoTitle">Video Title</label>
+                                    <input type="text" id="videoTitle" placeholder="Enter video title" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="videoDescription">Description</label>
+                                    <textarea id="videoDescription" rows="4" placeholder="Enter video description"></textarea>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="videoCategory">Category</label>
+                                        <select id="videoCategory">
+                                            <option value="tutorial">Tutorial</option>
+                                            <option value="review">Review</option>
+                                            <option value="vlog">Vlog</option>
+                                            <option value="tech">Technology</option>
+                                            <option value="lifestyle">Lifestyle</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="videoTags">Tags (comma separated)</label>
+                                        <input type="text" id="videoTags" placeholder="tag1, tag2, tag3">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="featuredVideo">
+                                        <span class="checkmark"></span>
+                                        Add to Featured Videos
+                                    </label>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-plus"></i>
+                                        Add Video
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="previewVideo">
+                                        <i class="fas fa-eye"></i>
+                                        Preview
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Tab -->
+                    <div class="tab-content" id="analyticsTab">
+                        <div class="analytics-dashboard">
+                            <h4>Video Analytics</h4>
+                            
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="totalViews">0</h3>
+                                        <p>Total Views</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="totalVideos">0</h3>
+                                        <p>Total Videos</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="featuredCount">0</h3>
+                                        <p>Featured Videos</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3 id="totalLikes">0</h3>
+                                        <p>Total Likes</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="recent-videos">
+                                <h5>Recent Videos</h5>
+                                <div class="recent-videos-list" id="recentVideosList">
+                                    <!-- Recent videos will be loaded here -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
