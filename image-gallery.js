@@ -607,9 +607,9 @@ class ImageGallery {
     getEmailConfig() {
         // Return email configuration
         return {
-            PUBLIC_KEY: "YOUR_PUBLIC_KEY_HERE", // Replace with your EmailJS public key
-            SERVICE_ID: "YOUR_SERVICE_ID_HERE", // Replace with your EmailJS service ID
-            TEMPLATE_ID: "YOUR_TEMPLATE_ID_HERE", // Replace with your EmailJS template ID
+            PUBLIC_KEY: "fskHEzXL0R69WMIWx", // Your EmailJS public key
+            SERVICE_ID: "Yservice_jzajkjf", // Your EmailJS service ID
+            TEMPLATE_ID: "template_d8a084j", // Your EmailJS template ID
             TO_EMAIL: "konaduprince26@gmail.com"
         };
     }

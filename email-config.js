@@ -3,13 +3,13 @@
 
 const EMAIL_CONFIG = {
     // Your EmailJS Public Key (found in EmailJS dashboard)
-    PUBLIC_KEY: "YOUR_PUBLIC_KEY_HERE",
+    PUBLIC_KEY: "fskHEzXL0R69WMIWx",
     
     // Your EmailJS Service ID (found in EmailJS services)
-    SERVICE_ID: "YOUR_SERVICE_ID_HERE",
+    SERVICE_ID: "Yservice_jzajkjf",
     
     // Your EmailJS Template ID (found in EmailJS templates)
-    TEMPLATE_ID: "YOUR_TEMPLATE_ID_HERE",
+    TEMPLATE_ID: "template_d8a084j",
     
     // Your email address where messages will be sent
     TO_EMAIL: "konaduprince26@gmail.com"
