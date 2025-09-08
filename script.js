@@ -64,7 +64,7 @@ class Router {
             }
         } else {
             // Handle 404 or unknown routes
-            this.handle404();
+            this.handle404(path);
         }
     }
 
@@ -78,8 +78,8 @@ class Router {
         }
     }
 
-    handle404() {
-        console.log('Route not found, redirecting to home');
+    handle404(path) {
+        console.log(`Route not found: "${path}", redirecting to home`);
         this.navigate('/', false);
     }
 }
