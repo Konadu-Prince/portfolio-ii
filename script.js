@@ -433,8 +433,8 @@ class ContactForm {
         submitBtn.disabled = true;
         
         try {
-            // Simulate API call (replace with actual endpoint)
-            await this.simulateApiCall(data);
+            // Send email using EmailJS
+            await this.sendEmailViaEmailJS(data);
             
             // Success
             this.showSuccessMessage();
@@ -449,6 +449,57 @@ class ContactForm {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
         }
+    }
+
+    getEmailConfig() {
+        // Return email configuration
+        return {
+            PUBLIC_KEY: "fskHEzXL0R69WMIWx", // Your EmailJS public key
+            SERVICE_ID: "Yservice_jzajkjf", // Your EmailJS service ID
+            TEMPLATE_ID: "template_d8a084j", // Your EmailJS template ID
+            TO_EMAIL: "konaduprince26@gmail.com"
+        };
+    }
+
+    async sendEmailViaEmailJS(data) {
+        const config = this.getEmailConfig();
+        
+        // Check if EmailJS is configured
+        if (config.PUBLIC_KEY === "YOUR_PUBLIC_KEY_HERE" || 
+            config.SERVICE_ID === "YOUR_SERVICE_ID_HERE" || 
+            config.TEMPLATE_ID === "YOUR_TEMPLATE_ID_HERE") {
+            throw new Error('EmailJS not configured. Please set up your EmailJS credentials.');
+        }
+        
+        // Initialize EmailJS if not already done
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init(config.PUBLIC_KEY);
+        } else {
+            throw new Error('EmailJS library not loaded. Please check your internet connection.');
+        }
+        
+        // Prepare template parameters
+        const templateParams = {
+            from_name: data.name,
+            from_email: data.email,
+            subject: data.subject || 'Portfolio Contact',
+            message: data.message,
+            to_email: config.TO_EMAIL
+        };
+        
+        // Send email using EmailJS
+        const response = await emailjs.send(
+            config.SERVICE_ID,
+            config.TEMPLATE_ID,
+            templateParams
+        );
+        
+        if (response.status !== 200) {
+            throw new Error('Failed to send email');
+        }
+        
+        // Log successful submission
+        console.log('Contact form submission:', data);
     }
 
     async simulateApiCall(data) {
