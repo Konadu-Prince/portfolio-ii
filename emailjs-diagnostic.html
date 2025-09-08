@@ -99,7 +99,7 @@
         <h2>📋 Your Current Configuration:</h2>
         <div class="code">Public Key: CkRKzzHs_sG2kfOwg
 Service ID: service_3z1za7s
-Template ID: template_6ajfmb6
+Template ID: template_c4uh8z2
 Recipient: konaduprince26@gmail.com</div>
 
         <h2>🧪 Test Your EmailJS Setup:</h2>
@@ -169,7 +169,7 @@ If you receive this email, your EmailJS setup is working correctly!</textarea>
         <ol>
             <li>Go to <a href="https://dashboard.emailjs.com" target="_blank">EmailJS Dashboard</a></li>
             <li>Check <strong>"Email Services"</strong> - make sure Gmail is connected</li>
-            <li>Check <strong>"Email Templates"</strong> - verify template_6ajfmb6 exists and is active</li>
+            <li>Check <strong>"Email Templates"</strong> - verify template_c4uh8z2 exists and is active</li>
             <li>Check <strong>"Account" → "API Keys"</strong> - verify your public key</li>
         </ol>
     </div>
@@ -182,7 +182,7 @@ If you receive this email, your EmailJS setup is working correctly!</textarea>
         const EMAIL_CONFIG = {
             PUBLIC_KEY: "CkRKzzHs_sG2kfOwg",
             SERVICE_ID: "service_3z1za7s",
-            TEMPLATE_ID: "template_6ajfmb6",
+            TEMPLATE_ID: "template_c4uh8z2",
             TO_EMAIL: "konaduprince26@gmail.com"
         };
 
@@ -274,7 +274,7 @@ If you receive this email, your EmailJS setup is working correctly!</textarea>
                 let suggestions = [];
                 
                 if (error.message.includes('Template ID not found')) {
-                    suggestions.push('Check that template_6ajfmb6 exists in your EmailJS dashboard');
+                    suggestions.push('Check that template_c4uh8z2 exists in your EmailJS dashboard');
                     suggestions.push('Verify the template is saved and active');
                 } else if (error.message.includes('Service ID not found')) {
                     suggestions.push('Check that service_3z1za7s exists in your EmailJS dashboard');

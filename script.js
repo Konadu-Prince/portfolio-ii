@@ -508,7 +508,7 @@ class ContactForm {
         return {
             PUBLIC_KEY: "CkRKzzHs_sG2kfOwg", // Your EmailJS public key - UPDATED!
             SERVICE_ID: "service_3z1za7s", // Your EmailJS service ID - UPDATED!
-            TEMPLATE_ID: "template_6ajfmb6", // Your EmailJS template ID - UPDATED!
+            TEMPLATE_ID: "template_c4uh8z2", // Your EmailJS template ID - UPDATED!
             TO_EMAIL: "konaduprince26@gmail.com"
         };
     }
