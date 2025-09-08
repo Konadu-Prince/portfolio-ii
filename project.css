@@ -31,68 +31,76 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: #ffffff;
+    border-bottom: 1px solid #e0dfdc;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.08);
     z-index: 1000;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1128px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 52px;
 }
 
 .nav-logo a {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 24px;
-    font-weight: 700;
-    color: #2c3e50;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #0a66c2;
     text-decoration: none;
+    transition: all 0.2s ease;
 }
 
 .nav-logo i {
-    color: #3498db;
-    font-size: 28px;
+    color: #0a66c2;
+    font-size: 24px;
+}
+
+.nav-logo a:hover {
+    color: #004182;
+    text-decoration: none;
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
 
 .nav-link {
-    color: #2c3e50;
+    color: #666666;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
     position: relative;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #3498db;
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 40px;
 }
 
 .nav-link:hover {
-    color: #3498db;
+    color: #000000;
+    background: #f3f2ef;
+    text-decoration: none;
+}
+
+.nav-link.active {
+    color: #0a66c2;
+    background: #e7f3ff;
+    font-weight: 600;
 }
 
 .hamburger {
