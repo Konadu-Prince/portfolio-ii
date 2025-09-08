@@ -506,9 +506,9 @@ class ContactForm {
     getEmailConfig() {
         // Return email configuration
         return {
-            PUBLIC_KEY: "fskHEzXL0R69WMIWx", // Your EmailJS public key - UPDATE THIS
+            PUBLIC_KEY: "CkRKzzHs_sG2kfOwg", // Your EmailJS public key - UPDATED!
             SERVICE_ID: "service_3z1za7s", // Your EmailJS service ID - UPDATED!
-            TEMPLATE_ID: "template_d8a084j", // Your EmailJS template ID - UPDATE THIS
+            TEMPLATE_ID: "template_6ajfmb6", // Your EmailJS template ID - UPDATED!
             TO_EMAIL: "konaduprince26@gmail.com"
         };
     }
