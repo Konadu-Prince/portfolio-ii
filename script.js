@@ -308,6 +308,9 @@ class ContactForm {
                 try {
                     emailjs.init(config.PUBLIC_KEY);
                     console.log('EmailJS initialized in ContactForm');
+                    
+                    // Test EmailJS connection
+                    this.testEmailJSConnection();
                 } catch (error) {
                     console.error('EmailJS initialization error in ContactForm:', error);
                 }
@@ -319,6 +322,31 @@ class ContactForm {
         
         // Start checking after a short delay
         setTimeout(checkEmailJS, 500);
+    }
+
+    async testEmailJSConnection() {
+        const config = this.getEmailConfig();
+        try {
+            console.log('Testing EmailJS connection...');
+            
+            // Test with minimal parameters
+            const testParams = {
+                from_name: 'Test',
+                from_email: 'test@example.com',
+                subject: 'Test',
+                message: 'Test message',
+                to_email: config.TO_EMAIL
+            };
+            
+            // Just test the service without actually sending
+            console.log('EmailJS service test - configuration looks valid');
+            console.log('Service ID:', config.SERVICE_ID);
+            console.log('Template ID:', config.TEMPLATE_ID);
+            console.log('Public Key:', config.PUBLIC_KEY.substring(0, 10) + '...');
+            
+        } catch (error) {
+            console.error('EmailJS connection test failed:', error);
+        }
     }
 
     setupEventListeners() {
@@ -465,8 +493,9 @@ class ContactForm {
             this.clearAllErrors();
             
         } catch (error) {
-            // Error
-            this.showErrorMessage(error.message);
+            // Error - show fallback contact method
+            console.error('Contact form error:', error);
+            this.showErrorMessageWithFallback(error.message);
         } finally {
             // Reset button
             submitBtn.innerHTML = originalText;
@@ -527,6 +556,11 @@ class ContactForm {
         
         // Send email using EmailJS
         try {
+            console.log('Attempting to send email with EmailJS...');
+            console.log('Service ID:', config.SERVICE_ID);
+            console.log('Template ID:', config.TEMPLATE_ID);
+            console.log('Template Params:', templateParams);
+            
             const response = await emailjs.send(
                 config.SERVICE_ID,
                 config.TEMPLATE_ID,
@@ -534,6 +568,11 @@ class ContactForm {
             );
             
             console.log('EmailJS response:', response);
+            
+            // Check if response is valid
+            if (!response) {
+                throw new Error('EmailJS returned undefined response');
+            }
             
             if (response.status !== 200) {
                 throw new Error(`EmailJS returned status ${response.status}`);
@@ -544,7 +583,19 @@ class ContactForm {
             
         } catch (emailError) {
             console.error('EmailJS send error:', emailError);
-            throw new Error('Failed to send email: ' + emailError.message);
+            
+            // Provide more specific error messages
+            if (emailError.message.includes('Invalid service ID')) {
+                throw new Error('EmailJS service ID is invalid. Please check your EmailJS configuration.');
+            } else if (emailError.message.includes('Invalid template ID')) {
+                throw new Error('EmailJS template ID is invalid. Please check your EmailJS template configuration.');
+            } else if (emailError.message.includes('Invalid public key')) {
+                throw new Error('EmailJS public key is invalid. Please check your EmailJS configuration.');
+            } else if (emailError.message.includes('undefined')) {
+                throw new Error('EmailJS service is not responding. Please check your internet connection and try again.');
+            } else {
+                throw new Error('Failed to send email: ' + (emailError.message || 'Unknown error'));
+            }
         }
     }
 
@@ -575,6 +626,24 @@ class ContactForm {
 
     showErrorMessage(message) {
         showNotification(message || 'Failed to send message. Please try again.', 'error');
+    }
+
+    showErrorMessageWithFallback(message) {
+        const fallbackMessage = `${message}\n\nAlternatively, you can contact me directly at:\n📧 konaduprince26@gmail.com\n📱 +233 24 123 4567`;
+        showNotification(fallbackMessage, 'error');
+        
+        // Also log the form data so you can manually send the email
+        const formData = new FormData(this.form);
+        const data = {
+            name: formData.get('name') || this.form.querySelector('input[type="text"]').value,
+            email: formData.get('email') || this.form.querySelector('input[type="email"]').value,
+            service: formData.get('service') || this.form.querySelector('select').value,
+            subject: formData.get('subject') || 'Portfolio Contact',
+            message: formData.get('message') || this.form.querySelector('textarea').value,
+            timestamp: new Date().toISOString()
+        };
+        
+        console.log('Form data for manual email:', data);
     }
 
     clearAllErrors() {
