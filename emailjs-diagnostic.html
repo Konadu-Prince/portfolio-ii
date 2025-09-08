@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmailJS Diagnostic Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+        }
+        .btn {
+            background: #0077b5;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #005885;
+        }
+        .code {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #dee2e6;
+            white-space: pre-wrap;
+        }
+        #testResult {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 EmailJS Diagnostic Tool</h1>
+        
+        <div class="info">
+            <strong>Purpose:</strong> This tool will help diagnose why your EmailJS contact form might not be working, even with real credentials.
+        </div>
+
+        <h2>📋 Your Current Configuration:</h2>
+        <div class="code">Public Key: CkRKzzHs_sG2kfOwg
+Service ID: service_3z1za7s
+Template ID: template_6ajfmb6
+Recipient: konaduprince26@gmail.com</div>
+
+        <h2>🧪 Test Your EmailJS Setup:</h2>
+        <p>Fill out the form below and click "Test EmailJS" to see exactly what happens:</p>
+        
+        <form id="diagnosticForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="Test User" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="test@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" value="EmailJS Diagnostic Test" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required>This is a diagnostic test to check if EmailJS is working properly with your real credentials.
+
+Test Details:
+- Time: ${new Date().toLocaleString()}
+- Test Type: EmailJS Diagnostic
+- Credentials: Real values from your EmailJS account
+
+If you receive this email, your EmailJS setup is working correctly!</textarea>
+            </div>
+            
+            <button type="submit" class="btn">🔍 Test EmailJS</button>
+        </form>
+        
+        <div id="testResult"></div>
+
+        <h2>🔧 Common Issues & Solutions:</h2>
+        
+        <div class="warning">
+            <strong>1. Template Variables Mismatch:</strong><br>
+            Your EmailJS template must use these exact variable names:
+            <div class="code">{{from_name}}
+{{from_email}}
+{{subject}}
+{{message}}
+{{to_email}}</div>
+        </div>
+
+        <div class="warning">
+            <strong>2. Template Content:</strong><br>
+            Make sure your EmailJS template includes all required variables and has proper content.
+        </div>
+
+        <div class="warning">
+            <strong>3. Service Connection:</strong><br>
+            Verify that your Gmail service is properly connected in your EmailJS dashboard.
+        </div>
+
+        <div class="warning">
+            <strong>4. Template Status:</strong><br>
+            Ensure your template is saved and active in your EmailJS dashboard.
+        </div>
+
+        <h2>📧 Check Your EmailJS Dashboard:</h2>
+        <ol>
+            <li>Go to <a href="https://dashboard.emailjs.com" target="_blank">EmailJS Dashboard</a></li>
+            <li>Check <strong>"Email Services"</strong> - make sure Gmail is connected</li>
+            <li>Check <strong>"Email Templates"</strong> - verify template_6ajfmb6 exists and is active</li>
+            <li>Check <strong>"Account" → "API Keys"</strong> - verify your public key</li>
+        </ol>
+    </div>
+
+    <!-- EmailJS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script>
+        // Your real EmailJS configuration
+        const EMAIL_CONFIG = {
+            PUBLIC_KEY: "CkRKzzHs_sG2kfOwg",
+            SERVICE_ID: "service_3z1za7s",
+            TEMPLATE_ID: "template_6ajfmb6",
+            TO_EMAIL: "konaduprince26@gmail.com"
+        };
+
+        // Initialize EmailJS
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing EmailJS diagnostic...');
+            
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init(EMAIL_CONFIG.PUBLIC_KEY);
+                console.log('EmailJS initialized successfully');
+            } else {
+                console.error('EmailJS library not loaded');
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('diagnosticForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('testResult');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            // Update button state
+            submitBtn.innerHTML = '⏳ Testing...';
+            submitBtn.disabled = true;
+            
+            // Hide previous results
+            resultDiv.style.display = 'none';
+            
+            try {
+                // Get form data
+                const formData = new FormData(this);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message'),
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log('Diagnostic test data:', data);
+                
+                // Check if EmailJS is available
+                if (typeof emailjs === 'undefined') {
+                    throw new Error('EmailJS library not loaded');
+                }
+                
+                // Prepare template parameters (exactly as in your main code)
+                const templateParams = {
+                    from_name: data.name,
+                    from_email: data.email,
+                    subject: data.subject,
+                    message: data.message,
+                    to_email: EMAIL_CONFIG.TO_EMAIL
+                };
+                
+                console.log('Template parameters:', templateParams);
+                console.log('EmailJS config:', EMAIL_CONFIG);
+                
+                // Send email
+                const response = await emailjs.send(
+                    EMAIL_CONFIG.SERVICE_ID,
+                    EMAIL_CONFIG.TEMPLATE_ID,
+                    templateParams
+                );
+                
+                console.log('EmailJS response:', response);
+                
+                if (response && response.status === 200) {
+                    // Success
+                    resultDiv.className = 'status success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ SUCCESS! EmailJS is Working!</h3>
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Message ID:</strong> ${response.text}</p>
+                        <p><strong>Recipient:</strong> ${EMAIL_CONFIG.TO_EMAIL}</p>
+                        <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                        <p><strong>Result:</strong> Your EmailJS setup is working correctly! Check your email inbox.</p>
+                    `;
+                } else {
+                    throw new Error(`EmailJS returned status: ${response ? response.status : 'undefined'}`);
+                }
+                
+            } catch (error) {
+                console.error('EmailJS diagnostic error:', error);
+                
+                // Detailed error analysis
+                let errorMessage = error.message;
+                let suggestions = [];
+                
+                if (error.message.includes('Template ID not found')) {
+                    suggestions.push('Check that template_6ajfmb6 exists in your EmailJS dashboard');
+                    suggestions.push('Verify the template is saved and active');
+                } else if (error.message.includes('Service ID not found')) {
+                    suggestions.push('Check that service_3z1za7s exists in your EmailJS dashboard');
+                    suggestions.push('Verify your Gmail service is connected');
+                } else if (error.message.includes('Invalid public key')) {
+                    suggestions.push('Check that CkRKzzHs_sG2kfOwg is your correct public key');
+                    suggestions.push('Verify the key in your EmailJS dashboard');
+                } else if (error.message.includes('Template variables')) {
+                    suggestions.push('Check that your template uses the correct variable names');
+                    suggestions.push('Template should use: {{from_name}}, {{from_email}}, {{subject}}, {{message}}, {{to_email}}');
+                }
+                
+                // Error
+                resultDiv.className = 'status error';
+                resultDiv.innerHTML = `
+                    <h3>❌ EmailJS Test Failed</h3>
+                    <p><strong>Error:</strong> ${errorMessage}</p>
+                    <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                    <p><strong>Debug Info:</strong></p>
+                    <ul>
+                        <li>EmailJS Library: ${typeof emailjs !== 'undefined' ? '✅ Loaded' : '❌ Not loaded'}</li>
+                        <li>Public Key: ${EMAIL_CONFIG.PUBLIC_KEY}</li>
+                        <li>Service ID: ${EMAIL_CONFIG.SERVICE_ID}</li>
+                        <li>Template ID: ${EMAIL_CONFIG.TEMPLATE_ID}</li>
+                    </ul>
+                    ${suggestions.length > 0 ? `
+                    <p><strong>Suggestions:</strong></p>
+                    <ul>
+                        ${suggestions.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ` : ''}
+                `;
+            } finally {
+                // Reset button
+                submitBtn.innerHTML = '🔍 Test EmailJS';
+                submitBtn.disabled = false;
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
