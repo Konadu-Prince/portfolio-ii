@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #0077b5;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #005885;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-form">
+        <h1>🧪 Contact Form Test</h1>
+        <p>This is a test to verify EmailJS integration is working properly.</p>
+        
+        <form id="testContactForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="Test User" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="test@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="service">Service:</label>
+                <select id="service" name="service">
+                    <option value="web-development">Web Development</option>
+                    <option value="consulting">Consulting</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" value="Test Email from Portfolio Contact Form" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required>This is a test message to verify that the EmailJS integration is working correctly. 
+
+If you receive this email, it means the contact form is successfully sending emails to your inbox.
+
+Test Details:
+- Time: ${new Date().toLocaleString()}
+- Browser: ${navigator.userAgent}
+- Test Type: EmailJS Integration Test
+
+Best regards,
+Portfolio Contact Form Test</textarea>
+            </div>
+            
+            <button type="submit" id="submitBtn">🚀 Send Test Email</button>
+        </form>
+        
+        <div id="result" class="result"></div>
+    </div>
+
+    <!-- EmailJS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script>
+        // EmailJS Configuration
+        const EMAIL_CONFIG = {
+            PUBLIC_KEY: "fskHEzXL0R69WMIWx",
+            SERVICE_ID: "Yservice_jzajkjf", 
+            TEMPLATE_ID: "template_d8a084j",
+            TO_EMAIL: "konaduprince26@gmail.com"
+        };
+
+        // Initialize EmailJS
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing EmailJS test...');
+            
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init(EMAIL_CONFIG.PUBLIC_KEY);
+                console.log('EmailJS initialized successfully');
+            } else {
+                console.error('EmailJS library not loaded');
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('testContactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const resultDiv = document.getElementById('result');
+            
+            // Update button state
+            submitBtn.innerHTML = '⏳ Sending...';
+            submitBtn.disabled = true;
+            
+            // Hide previous results
+            resultDiv.style.display = 'none';
+            
+            try {
+                // Get form data
+                const formData = new FormData(this);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    service: formData.get('service'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message'),
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log('Sending test email with data:', data);
+                
+                // Check if EmailJS is available
+                if (typeof emailjs === 'undefined') {
+                    throw new Error('EmailJS library not loaded');
+                }
+                
+                // Prepare template parameters
+                const templateParams = {
+                    from_name: data.name,
+                    from_email: data.email,
+                    subject: data.subject,
+                    message: data.message,
+                    to_email: EMAIL_CONFIG.TO_EMAIL
+                };
+                
+                console.log('EmailJS template params:', templateParams);
+                
+                // Send email
+                const response = await emailjs.send(
+                    EMAIL_CONFIG.SERVICE_ID,
+                    EMAIL_CONFIG.TEMPLATE_ID,
+                    templateParams
+                );
+                
+                console.log('EmailJS response:', response);
+                
+                if (response && response.status === 200) {
+                    // Success
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ Test Email Sent Successfully!</h3>
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Message ID:</strong> ${response.text}</p>
+                        <p><strong>Recipient:</strong> ${EMAIL_CONFIG.TO_EMAIL}</p>
+                        <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                        <p>Check your email inbox at <strong>konaduprince26@gmail.com</strong> for the test message!</p>
+                    `;
+                } else {
+                    throw new Error(`EmailJS returned status: ${response ? response.status : 'undefined'}`);
+                }
+                
+            } catch (error) {
+                console.error('Test email error:', error);
+                
+                // Error
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Test Email Failed</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                    <p><strong>Debug Info:</strong></p>
+                    <ul>
+                        <li>EmailJS Library: ${typeof emailjs !== 'undefined' ? '✅ Loaded' : '❌ Not loaded'}</li>
+                        <li>Public Key: ${EMAIL_CONFIG.PUBLIC_KEY.substring(0, 10)}...</li>
+                        <li>Service ID: ${EMAIL_CONFIG.SERVICE_ID}</li>
+                        <li>Template ID: ${EMAIL_CONFIG.TEMPLATE_ID}</li>
+                    </ul>
+                `;
+            } finally {
+                // Reset button
+                submitBtn.innerHTML = '🚀 Send Test Email';
+                submitBtn.disabled = false;
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
