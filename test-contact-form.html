@@ -213,7 +213,7 @@ Portfolio Contact Form Test</textarea>
             } catch (error) {
                 console.error('Test email error:', error);
                 
-                // Error
+                // Error - show fallback option
                 resultDiv.className = 'result error';
                 resultDiv.innerHTML = `
                     <h3>❌ Test Email Failed</h3>
@@ -226,6 +226,13 @@ Portfolio Contact Form Test</textarea>
                         <li>Service ID: ${EMAIL_CONFIG.SERVICE_ID}</li>
                         <li>Template ID: ${EMAIL_CONFIG.TEMPLATE_ID}</li>
                     </ul>
+                    <hr>
+                    <h4>🔧 Alternative: Direct Email</h4>
+                    <p>Since EmailJS is not configured, you can send the email directly:</p>
+                    <a href="mailto:${EMAIL_CONFIG.TO_EMAIL}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`From: ${data.name} (${data.email})\n\nMessage:\n${data.message}`)}" 
+                       class="btn btn-primary" style="background: #0077b5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">
+                        📧 Send Email Directly
+                    </a>
                 `;
             } finally {
                 // Reset button

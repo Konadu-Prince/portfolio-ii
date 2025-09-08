@@ -629,10 +629,7 @@ class ContactForm {
     }
 
     showErrorMessageWithFallback(message) {
-        const fallbackMessage = `${message}\n\nAlternatively, you can contact me directly at:\n📧 konaduprince26@gmail.com\n📱 +233 24 123 4567`;
-        showNotification(fallbackMessage, 'error');
-        
-        // Also log the form data so you can manually send the email
+        // Get form data for direct email
         const formData = new FormData(this.form);
         const data = {
             name: formData.get('name') || this.form.querySelector('input[type="text"]').value,
@@ -644,6 +641,54 @@ class ContactForm {
         };
         
         console.log('Form data for manual email:', data);
+        
+        // Create direct email link
+        const emailSubject = encodeURIComponent(data.subject);
+        const emailBody = encodeURIComponent(`From: ${data.name} (${data.email})\nService: ${data.service}\n\nMessage:\n${data.message}`);
+        const directEmailLink = `mailto:konaduprince26@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+        
+        // Show error with direct email option
+        const fallbackMessage = `${message}\n\n🔧 Alternative: Click the button below to send email directly using your email client.`;
+        
+        // Create a more detailed notification with direct email button
+        const notification = document.createElement('div');
+        notification.className = 'notification error';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            max-width: 400px;
+            border: 1px solid #f5c6cb;
+        `;
+        
+        notification.innerHTML = `
+            <h4 style="margin: 0 0 10px 0; color: #721c24;">❌ Email Failed</h4>
+            <p style="margin: 0 0 15px 0;">${message}</p>
+            <p style="margin: 0 0 15px 0; font-size: 14px;">🔧 Alternative: Send email directly</p>
+            <a href="${directEmailLink}" 
+               style="background: #0077b5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; font-size: 14px;">
+                📧 Send Email Directly
+            </a>
+            <button onclick="this.parentElement.remove()" 
+                    style="background: none; border: none; color: #721c24; float: right; cursor: pointer; font-size: 18px; margin-top: -5px;">
+                ×
+            </button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto-remove after 10 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 10000);
     }
 
     clearAllErrors() {
