@@ -229,7 +229,7 @@ Portfolio Contact Form Test</textarea>
                     <hr>
                     <h4>🔧 Alternative: Direct Email</h4>
                     <p>Since EmailJS is not configured, you can send the email directly:</p>
-                    <a href="mailto:${EMAIL_CONFIG.TO_EMAIL}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`From: ${data.name} (${data.email})\n\nMessage:\n${data.message}`)}" 
+                    <a href="mailto:${EMAIL_CONFIG.TO_EMAIL}?subject=${encodeURIComponent(formData.get('subject') || 'Portfolio Contact')}&body=${encodeURIComponent(`From: ${formData.get('name') || 'Test User'} (${formData.get('email') || 'test@example.com'})\n\nMessage:\n${formData.get('message') || 'Test message'}`)}" 
                        class="btn btn-primary" style="background: #0077b5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">
                         📧 Send Email Directly
                     </a>

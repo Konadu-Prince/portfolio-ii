@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmailJS Setup Wizard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .wizard {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .step {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .step.active {
+            border-color: #0077b5;
+            background: #f8f9fa;
+        }
+        .step-number {
+            background: #0077b5;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .step-content {
+            margin-left: 40px;
+        }
+        .btn {
+            background: #0077b5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #005885;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            margin: 10px 0;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .config-display {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wizard">
+        <h1>🚀 EmailJS Setup Wizard</h1>
+        <p>This wizard will help you set up EmailJS to receive contact form messages in your email.</p>
+        
+        <div class="error">
+            <strong>Current Issue:</strong> The service ID "Yservice_jzajkjf" not found. You need real EmailJS credentials.
+        </div>
+
+        <div class="step active">
+            <div class="step-title">
+                <span class="step-number">1</span>
+                Create EmailJS Account
+            </div>
+            <div class="step-content">
+                <p>First, you need a free EmailJS account:</p>
+                <ol>
+                    <li>Go to <a href="https://www.emailjs.com/" target="_blank">https://www.emailjs.com/</a></li>
+                    <li>Click <strong>"Sign Up"</strong> (it's completely free)</li>
+                    <li>Verify your email address</li>
+                </ol>
+                <a href="https://www.emailjs.com/" target="_blank" class="btn">Open EmailJS Website</a>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">2</span>
+                Add Email Service
+            </div>
+            <div class="step-content">
+                <p>Connect your Gmail account:</p>
+                <ol>
+                    <li>In EmailJS dashboard, go to <strong>"Email Services"</strong></li>
+                    <li>Click <strong>"Add New Service"</strong></li>
+                    <li>Choose <strong>"Gmail"</strong></li>
+                    <li>Connect your Gmail account</li>
+                    <li><strong>Copy the Service ID</strong> (looks like: <code>service_xxxxxxx</code>)</li>
+                </ol>
+                <div class="highlight">
+                    <strong>Note:</strong> The Service ID will be different from the current demo ID "Yservice_jzajkjf"
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">3</span>
+                Create Email Template
+            </div>
+            <div class="step-content">
+                <p>Create a template for contact form emails:</p>
+                <ol>
+                    <li>Go to <strong>"Email Templates"</strong></li>
+                    <li>Click <strong>"Create New Template"</strong></li>
+                    <li>Use this template content:</li>
+                </ol>
+                <div class="code-block">
+Subject: New Contact: {{subject}}
+
+From: {{from_name}} ({{from_email}})
+
+Message:
+{{message}}
+
+---
+Sent from your portfolio contact form.
+                </div>
+                <ol start="4">
+                    <li>Save the template</li>
+                    <li><strong>Copy the Template ID</strong> (looks like: <code>template_xxxxxxx</code>)</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">4</span>
+                Get Your Public Key
+            </div>
+            <div class="step-content">
+                <p>Get your API key:</p>
+                <ol>
+                    <li>Go to <strong>"Account"</strong> → <strong>"API Keys"</strong></li>
+                    <li><strong>Copy your Public Key</strong> (looks like: <code>xxxxxxxxxxxxxxx</code>)</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">5</span>
+                Update Your Portfolio
+            </div>
+            <div class="step-content">
+                <p>Enter your EmailJS credentials below:</p>
+                
+                <div class="form-group">
+                    <label for="publicKey">Public Key:</label>
+                    <input type="text" id="publicKey" placeholder="Your actual public key">
+                </div>
+                
+                <div class="form-group">
+                    <label for="serviceId">Service ID:</label>
+                    <input type="text" id="serviceId" placeholder="Your actual service ID">
+                </div>
+                
+                <div class="form-group">
+                    <label for="templateId">Template ID:</label>
+                    <input type="text" id="templateId" placeholder="Your actual template ID">
+                </div>
+                
+                <button onclick="generateConfig()" class="btn">Generate Configuration</button>
+                
+                <div id="configResult" style="display: none;">
+                    <h4>Your Configuration:</h4>
+                    <div class="config-display" id="configDisplay"></div>
+                    <p><strong>Next Steps:</strong></p>
+                    <ol>
+                        <li>Copy the configuration above</li>
+                        <li>Replace the credentials in <code>script.js</code> (around line 509)</li>
+                        <li>Replace the credentials in <code>test-contact-form.html</code> (around line 127)</li>
+                        <li>Test the contact form again!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">6</span>
+                Test Your Setup
+            </div>
+            <div class="step-content">
+                <p>After updating your credentials:</p>
+                <ol>
+                    <li>Refresh your portfolio page</li>
+                    <li>Go to the contact form</li>
+                    <li>Fill out and submit the form</li>
+                    <li>Check your email inbox!</li>
+                </ol>
+                <a href="http://localhost:8080/test-contact-form.html" class="btn">Test Contact Form</a>
+                <a href="http://localhost:8080/index.html" class="btn btn-secondary">View Portfolio</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateConfig() {
+            const publicKey = document.getElementById('publicKey').value.trim();
+            const serviceId = document.getElementById('serviceId').value.trim();
+            const templateId = document.getElementById('templateId').value.trim();
+            
+            if (!publicKey || !serviceId || !templateId) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            const config = `getEmailConfig() {
+    return {
+        PUBLIC_KEY: "${publicKey}",
+        SERVICE_ID: "${serviceId}",
+        TEMPLATE_ID: "${templateId}",
+        TO_EMAIL: "konaduprince26@gmail.com"
+    };
+}`;
+            
+            document.getElementById('configDisplay').textContent = config;
+            document.getElementById('configResult').style.display = 'block';
+            
+            // Scroll to result
+            document.getElementById('configResult').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
