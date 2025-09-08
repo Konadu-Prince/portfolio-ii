@@ -602,13 +602,12 @@ body {
 }
 
 .certification-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid #e0dfdc;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.08);
+    transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
 }
@@ -619,58 +618,55 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, #3498db, #f39c12);
+    height: 3px;
+    background: #0a66c2;
 }
 
 .certification-card.cisco::before {
-    background: linear-gradient(90deg, #1ba1d2, #0073aa);
+    background: #0a66c2;
 }
 
 .certification-card.comptia::before {
-    background: linear-gradient(90deg, #e74c3c, #c0392b);
+    background: #0a66c2;
 }
 
 .certification-card.aws::before {
-    background: linear-gradient(90deg, #ff9900, #232f3e);
+    background: #0a66c2;
 }
 
 .certification-card.cybersecurity::before {
-    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    background: #0a66c2;
 }
 
 .certification-card:hover {
-    will-change: transform;
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 4px 8px rgba(0,0,0,.12);
 }
 
 .certification-icon {
     width: 70px;
     height: 70px;
-    background: linear-gradient(135deg, #3498db, #f39c12);
+    background: #0a66c2;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .certification-card.cisco .certification-icon {
-    background: linear-gradient(135deg, #1ba1d2, #0073aa);
+    background: #0a66c2;
 }
 
 .certification-card.comptia .certification-icon {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    background: #0a66c2;
 }
 
 .certification-card.aws .certification-icon {
-    background: linear-gradient(135deg, #ff9900, #232f3e);
+    background: #0a66c2;
 }
 
 .certification-card.cybersecurity .certification-icon {
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    background: #0a66c2;
 }
 
 .certification-icon i {
@@ -679,15 +675,17 @@ body {
 }
 
 .certification-card h3 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-    margin-bottom: 15px;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 12px;
+    font-weight: 600;
 }
 
 .certification-card p {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    font-size: 14px;
 }
 
 .certification-details {
@@ -1062,23 +1060,23 @@ body {
 
 /* Testimonials Section */
 .testimonials {
-    padding: 100px 0;
-    background: #f8f9fa;
+    padding: 48px 0;
+    background: #f3f2ef;
 }
 
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
+    gap: 24px;
 }
 
 .testimonial-card {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #f0f0f0;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid #e0dfdc;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.08);
+    transition: all 0.2s ease;
     position: relative;
 }
 
@@ -1088,15 +1086,13 @@ body {
     top: -10px;
     left: 20px;
     font-size: 4rem;
-    color: #3498db;
+    color: #0a66c2;
     font-family: serif;
     opacity: 0.3;
 }
 
 .testimonial-card:hover {
-    will-change: transform;
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 4px 8px rgba(0,0,0,.12);
 }
 
 .testimonial-content {
@@ -1106,22 +1102,23 @@ body {
 
 .testimonial-stars {
     display: flex;
-    gap: 5px;
-    margin-bottom: 20px;
+    gap: 4px;
+    margin-bottom: 16px;
     justify-content: center;
 }
 
 .testimonial-stars i {
-    color: #f39c12;
-    font-size: 1.2rem;
+    color: #0a66c2;
+    font-size: 16px;
 }
 
 .testimonial-content p {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 25px;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 20px;
     font-style: italic;
     text-align: center;
+    font-size: 14px;
 }
 
 .testimonial-author {
@@ -1129,14 +1126,15 @@ body {
 }
 
 .author-info h4 {
-    color: #2c3e50;
-    margin-bottom: 5px;
-    font-size: 1.1rem;
+    color: #000000;
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .author-info span {
-    color: #666;
-    font-size: 0.9rem;
+    color: #666666;
+    font-size: 14px;
 }
 
 /* Contact Section */
@@ -1575,8 +1573,8 @@ body {
 
 /* Testimonials Section */
 .testimonials {
-    padding: 100px 0;
-    background: #f8f9fa;
+    padding: 48px 0;
+    background: #f3f2ef;
 }
 
 .testimonials-grid {
