@@ -8,6 +8,10 @@ class Router {
             '/': 'index.html',
             '/portfolio': 'index.html',
             '/signin': 'signin.html',
+            '/gallery': 'image-gallery.html',
+            '/image-gallery': 'image-gallery.html',
+            '/youtube': 'youtube-showcase.html',
+            '/youtube-showcase': 'youtube-showcase.html',
             '/contact': 'index.html#contact',
             '/projects': 'index.html#projects',
             '/about': 'index.html#about',
@@ -304,7 +308,7 @@ class ContactForm {
         // Add validation attributes
         const emailInput = this.form.querySelector('input[type="email"]');
         if (emailInput) {
-            emailInput.setAttribute('pattern', '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$');
+            emailInput.setAttribute('pattern', '[a-z0-9._%\\+-]+@[a-z0-9.-]+\\.[a-z]{2,}$');
         }
     }
 
