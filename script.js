@@ -289,6 +289,7 @@ class ContactForm {
     constructor() {
         this.form = document.querySelector('.contact-form');
         this.init();
+        this.initEmailJS();
     }
 
     init() {
@@ -296,6 +297,28 @@ class ContactForm {
             this.setupEventListeners();
             this.setupValidation();
         }
+    }
+
+    initEmailJS() {
+        // Wait for EmailJS to load
+        const checkEmailJS = () => {
+            if (typeof emailjs !== 'undefined') {
+                console.log('EmailJS is available, initializing...');
+                const config = this.getEmailConfig();
+                try {
+                    emailjs.init(config.PUBLIC_KEY);
+                    console.log('EmailJS initialized in ContactForm');
+                } catch (error) {
+                    console.error('EmailJS initialization error in ContactForm:', error);
+                }
+            } else {
+                console.log('EmailJS not yet loaded, retrying...');
+                setTimeout(checkEmailJS, 100);
+            }
+        };
+        
+        // Start checking after a short delay
+        setTimeout(checkEmailJS, 500);
     }
 
     setupEventListeners() {
@@ -464,6 +487,9 @@ class ContactForm {
     async sendEmailViaEmailJS(data) {
         const config = this.getEmailConfig();
         
+        console.log('EmailJS Config:', config);
+        console.log('Form Data:', data);
+        
         // Check if EmailJS is configured
         if (config.PUBLIC_KEY === "YOUR_PUBLIC_KEY_HERE" || 
             config.SERVICE_ID === "YOUR_SERVICE_ID_HERE" || 
@@ -471,11 +497,21 @@ class ContactForm {
             throw new Error('EmailJS not configured. Please set up your EmailJS credentials.');
         }
         
-        // Initialize EmailJS if not already done
-        if (typeof emailjs !== 'undefined') {
+        // Check if EmailJS library is loaded
+        if (typeof emailjs === 'undefined') {
+            console.error('EmailJS library not loaded');
+            throw new Error('EmailJS library not loaded. Please check your internet connection and refresh the page.');
+        }
+        
+        console.log('EmailJS library loaded, initializing...');
+        
+        // Initialize EmailJS
+        try {
             emailjs.init(config.PUBLIC_KEY);
-        } else {
-            throw new Error('EmailJS library not loaded. Please check your internet connection.');
+            console.log('EmailJS initialized successfully');
+        } catch (initError) {
+            console.error('EmailJS initialization error:', initError);
+            throw new Error('Failed to initialize EmailJS: ' + initError.message);
         }
         
         // Prepare template parameters
@@ -487,19 +523,29 @@ class ContactForm {
             to_email: config.TO_EMAIL
         };
         
+        console.log('Sending email with params:', templateParams);
+        
         // Send email using EmailJS
-        const response = await emailjs.send(
-            config.SERVICE_ID,
-            config.TEMPLATE_ID,
-            templateParams
-        );
-        
-        if (response.status !== 200) {
-            throw new Error('Failed to send email');
+        try {
+            const response = await emailjs.send(
+                config.SERVICE_ID,
+                config.TEMPLATE_ID,
+                templateParams
+            );
+            
+            console.log('EmailJS response:', response);
+            
+            if (response.status !== 200) {
+                throw new Error(`EmailJS returned status ${response.status}`);
+            }
+            
+            // Log successful submission
+            console.log('Contact form submission successful:', data);
+            
+        } catch (emailError) {
+            console.error('EmailJS send error:', emailError);
+            throw new Error('Failed to send email: ' + emailError.message);
         }
-        
-        // Log successful submission
-        console.log('Contact form submission:', data);
     }
 
     async simulateApiCall(data) {

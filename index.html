@@ -1204,7 +1204,27 @@
     </nav>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Check if EmailJS loaded successfully
+        window.addEventListener('load', function() {
+            if (typeof emailjs === 'undefined') {
+                console.error('EmailJS failed to load from CDN');
+                // Try alternative CDN
+                const script = document.createElement('script');
+                script.src = 'https://unpkg.com/@emailjs/browser@4/dist/email.min.js';
+                script.onload = function() {
+                    console.log('EmailJS loaded from alternative CDN');
+                };
+                script.onerror = function() {
+                    console.error('EmailJS failed to load from both CDNs');
+                };
+                document.head.appendChild(script);
+            } else {
+                console.log('EmailJS loaded successfully');
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
