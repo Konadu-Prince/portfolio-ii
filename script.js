@@ -312,7 +312,7 @@ class ContactForm {
         // Add validation attributes
         const emailInput = this.form.querySelector('input[type="email"]');
         if (emailInput) {
-            emailInput.setAttribute('pattern', '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$');
+            emailInput.setAttribute('pattern', '[a-z0-9._%\\+-]+@[a-z0-9.-]+\\.[a-z]{2,}$');
         }
     }
 
