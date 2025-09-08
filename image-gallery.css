@@ -3,11 +3,11 @@
    ======================================== */
 
 /* ========================================
-   GALLERY NAVBAR
+   GALLERY NAVBAR - LinkedIn Colors
    ======================================== */
 
 .gallery-navbar {
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.95), rgba(155, 89, 182, 0.95));
+    background: linear-gradient(135deg, rgba(0, 119, 181, 0.95), rgba(0, 66, 102, 0.95));
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -43,7 +43,7 @@
 
 .gallery-navbar .nav-logo i {
     font-size: 1.5rem;
-    color: #f39c12;
+    color: #0077b5;
 }
 
 .gallery-navbar .nav-menu {
@@ -73,8 +73,8 @@
 }
 
 .gallery-navbar .nav-link.active {
-    color: #f39c12;
-    background: rgba(243, 156, 18, 0.2);
+    color: #0077b5;
+    background: rgba(0, 119, 181, 0.2);
     font-weight: 600;
 }
 
@@ -298,7 +298,7 @@ body {
    ======================================== */
 
 .gallery-header {
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15));
+    background: linear-gradient(135deg, rgba(0, 119, 181, 0.15), rgba(0, 66, 102, 0.15));
     backdrop-filter: blur(15px);
     padding: 80px 0;
     text-align: center;
@@ -350,9 +350,9 @@ body {
 }
 
 .profile-picture-container:hover {
-    border-color: #3498db;
+    border-color: #0077b5;
     transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
 }
 
 .profile-picture {
@@ -377,7 +377,7 @@ body {
 }
 
 .profile-picture-overlay.admin-only {
-    background: rgba(52, 152, 219, 0.8);
+    background: rgba(0, 119, 181, 0.8);
 }
 
 .profile-picture-container:hover .profile-picture-overlay {
@@ -699,14 +699,14 @@ input:checked + .slider:before {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: linear-gradient(135deg, #0077b5, #004266);
     color: white;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
 }
 
 .btn-secondary {
@@ -722,19 +722,19 @@ input:checked + .slider:before {
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    background: linear-gradient(135deg, #0077b5, #004266);
     color: white;
-    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
 }
 
 .btn-success:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
 }
 
 .btn-copy {
     padding: 10px;
-    background: #f39c12;
+    background: #0077b5;
     color: white;
     border: none;
     border-radius: 8px;
@@ -743,7 +743,7 @@ input:checked + .slider:before {
 }
 
 .btn-copy:hover {
-    background: #e67e22;
+    background: #004266;
     transform: scale(1.05);
 }
 
@@ -771,8 +771,8 @@ input:checked + .slider:before {
 }
 
 .view-options .btn.active {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
-    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+    background: linear-gradient(135deg, #0077b5, #004266);
+    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
 }
 
 /* ========================================
@@ -855,7 +855,7 @@ input:checked + .slider:before {
 }
 
 .btn-icon:hover {
-    background: #3498db;
+    background: #0077b5;
     transform: scale(1.1);
 }
 
@@ -2043,7 +2043,7 @@ input:checked + .slider:before {
     font-size: 2.5rem;
     color: white;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #ffffff, #f39c12);
+    background: linear-gradient(135deg, #ffffff, #0077b5);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2078,7 +2078,7 @@ input:checked + .slider:before {
 
 .contact-item i {
     font-size: 1.5rem;
-    color: #f39c12;
+    color: #0077b5;
     width: 30px;
     text-align: center;
 }
@@ -2135,9 +2135,9 @@ input:checked + .slider:before {
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: #f39c12;
+    border-color: #0077b5;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 20px rgba(243, 156, 18, 0.3);
+    box-shadow: 0 0 20px rgba(0, 119, 181, 0.3);
 }
 
 .contact-form textarea {
@@ -2150,7 +2150,7 @@ input:checked + .slider:before {
     padding: 15px;
     font-size: 1.1rem;
     font-weight: 600;
-    background: linear-gradient(135deg, #f39c12, #e67e22);
+    background: linear-gradient(135deg, #0077b5, #004266);
     border: none;
     border-radius: 10px;
     color: white;
@@ -2164,7 +2164,7 @@ input:checked + .slider:before {
 
 .contact-form .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
 }
 
 .contact-form .btn:active {

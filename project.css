@@ -1435,7 +1435,7 @@ body {
 .contact-form textarea:focus,
 .contact-form select:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #0077b5;
 }
 
 .contact-form textarea {
@@ -1460,7 +1460,7 @@ body {
 .footer-section h4 {
     font-size: 1.2rem;
     margin-bottom: 20px;
-    color: #3498db;
+    color: #0077b5;
 }
 
 .footer-logo {
@@ -1473,7 +1473,7 @@ body {
 }
 
 .footer-logo i {
-    color: #3498db;
+    color: #0077b5;
 }
 
 .footer-section p {
@@ -1498,7 +1498,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-    color: #3498db;
+    color: #0077b5;
 }
 
 .footer-social {
