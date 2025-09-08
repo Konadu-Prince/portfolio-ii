@@ -12,18 +12,20 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
+    color: #000000;
+    background: #f3f2ef;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1128px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
 /* Navigation */
@@ -140,9 +142,9 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding-top: 70px;
+    background: #f3f2ef;
+    color: #000000;
+    padding-top: 52px;
     position: relative;
     overflow: hidden;
 }
@@ -171,14 +173,15 @@ body {
 }
 
 .hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 16px;
     line-height: 1.2;
+    color: #000000;
 }
 
 .highlight {
-    color: #f39c12;
+    color: #0a66c2;
     position: relative;
 }
 
@@ -189,22 +192,22 @@ body {
     left: 0;
     width: 100%;
     height: 3px;
-    background: #f39c12;
+    background: #0a66c2;
     border-radius: 2px;
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: #ecf0f1;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #0a66c2;
 }
 
 .hero-description {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    color: #bdc3c7;
-    line-height: 1.6;
+    font-size: 16px;
+    margin-bottom: 32px;
+    color: #666666;
+    line-height: 1.5;
 }
 
 .hero-buttons {
@@ -232,31 +235,27 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
-    color: white;
-    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.3);
+    background: #0a66c2;
+    color: #ffffff;
+    border: 1px solid #0a66c2;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #e67e22, #d35400);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(243, 156, 18, 0.4);
+    background: #004182;
+    border-color: #004182;
+    color: #ffffff;
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    color: #666666;
+    border: 1px solid #666666;
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.9);
-    color: #2c3e50;
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.8);
+    background: #f3f2ef;
+    color: #000000;
+    border-color: #000000;
 }
 
 .btn-outline {
@@ -420,29 +419,29 @@ body {
 /* Section Styles */
 .section-title {
     text-align: center;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 50px;
-    color: #2c3e50;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    color: #000000;
     position: relative;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: -15px;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #3498db, #f39c12);
+    width: 60px;
+    height: 3px;
+    background: #0a66c2;
     border-radius: 2px;
 }
 
 /* About Section */
 .about {
-    padding: 100px 0;
-    background: #f8f9fa;
+    padding: 48px 0;
+    background: #f3f2ef;
 }
 
 .about-content {
