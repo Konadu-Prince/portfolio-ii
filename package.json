@@ -4,11 +4,13 @@
   "description": "Professional portfolio website with LinkedIn design system",
   "main": "server-manager.js",
   "scripts": {
-    "start": "node server-manager.js",
-    "dev": "node server-manager.js 3000",
-    "serve": "node server-manager.js 8080",
+    "start": "node enhanced-server.js",
+    "dev": "node enhanced-server.js 3000",
+    "serve": "node enhanced-server.js 8080",
+    "legacy": "node server-manager.js",
+    "analytics": "node enhanced-server.js 3000",
     "stop": "pkill -f 'python3 -m http.server' || true",
-    "clean": "pkill -f 'python3 -m http.server' && pkill -f 'node server-manager.js' || true"
+    "clean": "pkill -f 'python3 -m http.server' && pkill -f 'node server-manager.js' && pkill -f 'node enhanced-server.js' || true"
   },
   "keywords": [
     "portfolio",
