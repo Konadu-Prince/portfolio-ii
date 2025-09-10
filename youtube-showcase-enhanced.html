@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Panisow Animations - YouTube Content Showcase | Konadu Prince</title>
+    <meta name="description" content="Explore Konadu Prince's YouTube channel 'Panisow Animations' featuring AI basics, cybersecurity tips, technology insights, and software development tutorials.">
+    <meta name="keywords" content="Panisow Animations, YouTube, AI basics, cybersecurity, technology, software development, Konadu Prince, educational content">
+    <meta name="author" content="Konadu Prince">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Panisow Animations - YouTube Content Showcase | Konadu Prince">
+    <meta property="og:description" content="Discover educational content about AI, cybersecurity, and technology on Panisow Animations YouTube channel.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/youtube-showcase.html">
+    <meta property="og:image" content="logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="youtube-showcase.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="youtube-showcase.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Admin Panel Styles -->
+    <style>
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            overflow-y: auto;
+        }
+        
+        .admin-content {
+            background: white;
+            margin: 20px auto;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .admin-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .admin-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .admin-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-tab {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .admin-tab-content {
+            display: none;
+            padding: 30px;
+        }
+        
+        .admin-tab-content.active {
+            display: block;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .recent-activity {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-type {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .activity-details {
+            flex: 1;
+            margin: 0 15px;
+            color: #666;
+        }
+        
+        .activity-time {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .admin-controls {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .youtube-admin {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .admin-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-toggle:hover {
+            background: #5a6fd8;
+            transform: scale(1.1);
+        }
+        
+        .login-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .admin-content {
+                margin: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .activity-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .admin-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Panisow Animations YouTube Channel",
+      "description": "Educational content about AI basics, cybersecurity, and technology",
+      "thumbnailUrl": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "uploadDate": "2024-01-01",
+      "publisher": {
+        "@type": "Person",
+        "name": "Konadu Prince"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-code"></i>
+                    <span>Konadu Prince</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="image-gallery.html" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="youtube-showcase.html" class="nav-link active">YouTube</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Panisow Animations</h1>
+                    <p class="hero-subtitle">Educational Content Creator</p>
+                    <p class="hero-description">
+                        Welcome to my YouTube channel where I share knowledge about AI basics, 
+                        cybersecurity tips, technology insights, and software development tutorials. 
+                        Making complex topics accessible to everyone.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://youtube.com/@panisowanimations" class="btn btn-primary" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                            <span>Visit Channel</span>
+                        </a>
+                        <a href="https://tiktok.com/@panisowanimations" class="btn btn-secondary" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                            <span>Follow on TikTok</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="youtube-logo">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Categories -->
+        <section class="content-categories">
+            <div class="container">
+                <h2 class="section-title">Content Categories</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI Basics</h3>
+                        <p>Understanding artificial intelligence concepts, machine learning fundamentals, and practical AI applications for beginners.</p>
+                        <div class="category-tags">
+                            <span>Machine Learning</span>
+                            <span>Neural Networks</span>
+                            <span>AI Applications</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Cybersecurity</h3>
+                        <p>Essential cybersecurity tips, threat awareness, and best practices to protect your digital life and data.</p>
+                        <div class="category-tags">
+                            <span>Security Tips</span>
+                            <span>Threat Awareness</span>
+                            <span>Best Practices</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Software Development</h3>
+                        <p>Programming tutorials, development tools, and coding best practices for aspiring developers.</p>
+                        <div class="category-tags">
+                            <span>Programming</span>
+                            <span>Web Development</span>
+                            <span>Tools & Tips</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Technology Insights</h3>
+                        <p>Latest technology trends, industry insights, and practical tech solutions for everyday problems.</p>
+                        <div class="category-tags">
+                            <span>Tech Trends</span>
+                            <span>Innovation</span>
+                            <span>Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Videos -->
+        <section class="featured-videos">
+            <div class="container">
+                <h2 class="section-title">Featured Videos</h2>
+                <div class="videos-grid" id="videosGrid">
+                    <!-- Videos will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Channel Stats -->
+        <section class="channel-stats">
+            <div class="container">
+                <h2 class="section-title">Channel Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="subscriberCount">Loading...</h3>
+                            <p class="stat-label">Subscribers</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="videoCount">Loading...</h3>
+                            <p class="stat-label">Videos</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="viewCount">Loading...</h3>
+                            <p class="stat-label">Total Views</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="channelAge">Loading...</h3>
+                            <p class="stat-label">Channel Age</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Admin Toggle Button -->
+    <button class="admin-toggle" id="adminToggle" title="Admin Panel">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-content">
+            <div class="admin-header">
+                <h1>🔧 Admin Panel</h1>
+                <p>Manage YouTube content and view analytics</p>
+                <button class="admin-close" id="adminClose">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="analytics">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </button>
+                <button class="admin-tab" data-tab="youtube">
+                    <i class="fab fa-youtube"></i> YouTube Management
+                </button>
+                <button class="admin-tab" data-tab="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+            
+            <!-- Analytics Tab -->
+            <div class="admin-tab-content active" id="analytics-tab">
+                <h2>📊 Portfolio Analytics</h2>
+                <div class="admin-controls">
+                    <button class="btn" onclick="loadAnalytics()">🔄 Refresh Data</button>
+                    <button class="btn btn-secondary" onclick="exportAnalytics()">📥 Export Data</button>
+                    <button class="btn btn-danger" onclick="clearAnalytics()">🗑️ Clear Data</button>
+                </div>
+                
+                <div class="stats-grid" id="analyticsStats">
+                    <div class="loading">Loading analytics data...</div>
+                </div>
+                
+                <div class="recent-activity" id="recentActivity">
+                    <h3>Recent Activity</h3>
+                    <div class="loading">Loading recent activity...</div>
+                </div>
+            </div>
+            
+            <!-- YouTube Management Tab -->
+            <div class="admin-tab-content" id="youtube-tab">
+                <h2>📺 YouTube Channel Management</h2>
+                <div class="youtube-admin">
+                    <div class="form-group">
+                        <label for="channelUrl">Channel URL:</label>
+                        <input type="url" id="channelUrl" value="https://youtube.com/@panisowanimations" placeholder="Enter YouTube channel URL">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="channelDescription">Channel Description:</label>
+                        <textarea id="channelDescription" placeholder="Enter channel description">Educational content about AI basics, cybersecurity tips, technology insights, and software development tutorials. Making complex topics accessible to everyone.</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="featuredVideos">Featured Video IDs (comma-separated):</label>
+                        <input type="text" id="featuredVideos" placeholder="dQw4w9WgXcQ,abc123,def456" value="dQw4w9WgXcQ,abc123,def456">
+                    </div>
+                    
+                    <div class="admin-controls">
+                        <button class="btn" onclick="updateYouTubeSettings()">💾 Save Changes</button>
+                        <button class="btn btn-secondary" onclick="refreshChannelData()">🔄 Refresh Channel Data</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div class="admin-tab-content" id="settings-tab">
+                <h2>⚙️ Admin Settings</h2>
+                <div class="youtube-admin">
+                    <div class="form-group">
+                        <label for="adminPassword">Change Admin Password:</label>
+                        <input type="password" id="adminPassword" placeholder="Enter new password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                    </div>
+                    
+                    <div class="admin-controls">
+                        <button class="btn" onclick="updateAdminPassword()">🔐 Update Password</button>
+                        <button class="btn btn-danger" onclick="logout()">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="login-form" id="loginForm">
+        <div class="login-container">
+            <h2>🔒 Admin Access</h2>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+            </form>
+            <div class="error-message" id="errorMessage">Invalid credentials</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-code"></i>
+                        <span>Konadu Prince</span>
+                    </div>
+                    <p>Cybersecurity Analyst, Software Developer, and Content Creator dedicated to sharing knowledge and helping others grow.</p>
+                    <div class="footer-social">
+                        <a href="https://www.linkedin.com/in/konadu-prince" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/konaduprince" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://youtube.com/@panisowanimations" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://tiktok.com/@panisowanimations" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Content Categories</h4>
+                    <ul>
+                        <li><a href="#ai-basics">AI Basics</a></li>
+                        <li><a href="#cybersecurity">Cybersecurity</a></li>
+                        <li><a href="#development">Software Development</a></li>
+                        <li><a href="#technology">Technology Insights</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Portfolio</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="image-gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow Me</h4>
+                    <div class="footer-social">
+                        <a href="https://youtube.com/@panisowanimations" target="_blank">
+                            <i class="fab fa-youtube"></i> YouTube
+                        </a>
+                        <a href="https://tiktok.com/@panisowanimations" target="_blank">
+                            <i class="fab fa-tiktok"></i> TikTok
+                        </a>
+                        <a href="https://www.linkedin.com/in/konadu-prince" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Konadu Prince. All rights reserved. | Content Creator | Panisow Animations</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Analytics Script -->
+    <script src="analytics-github-pages.js"></script>
+    <script src="youtube-showcase.js"></script>
+    
+    <!-- Admin Panel Script -->
+    <script>
+        // Admin Panel Management
+        class AdminPanel {
+            constructor() {
+                this.username = 'admin';
+                this.password = 'portfolio2024'; // Change this to your desired password
+                this.sessionKey = 'youtube_admin_auth';
+                this.init();
+            }
+
+            init() {
+                // Check if user is already authenticated
+                if (this.isAuthenticated()) {
+                    this.showMainContent();
+                } else {
+                    this.showLoginForm();
+                }
+                
+                this.setupEventListeners();
+            }
+
+            isAuthenticated() {
+                const auth = sessionStorage.getItem(this.sessionKey);
+                return auth === 'true';
+            }
+
+            authenticate(username, password) {
+                if (username === this.username && password === this.password) {
+                    sessionStorage.setItem(this.sessionKey, 'true');
+                    this.showMainContent();
+                    return true;
+                }
+                return false;
+            }
+
+            logout() {
+                sessionStorage.removeItem(this.sessionKey);
+                this.showLoginForm();
+            }
+
+            showLoginForm() {
+                document.getElementById('loginForm').style.display = 'flex';
+                document.querySelector('main').style.display = 'none';
+                document.getElementById('adminToggle').style.display = 'none';
+            }
+
+            showMainContent() {
+                document.getElementById('loginForm').style.display = 'none';
+                document.querySelector('main').style.display = 'block';
+                document.getElementById('adminToggle').style.display = 'block';
+            }
+
+            setupEventListeners() {
+                // Login form
+                document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    
+                    if (this.authenticate(username, password)) {
+                        // Success - main content will be shown
+                    } else {
+                        document.getElementById('errorMessage').style.display = 'block';
+                    }
+                });
+
+                // Admin toggle
+                document.getElementById('adminToggle').addEventListener('click', () => {
+                    this.toggleAdminPanel();
+                });
+
+                // Admin close
+                document.getElementById('adminClose').addEventListener('click', () => {
+                    this.closeAdminPanel();
+                });
+
+                // Admin tabs
+                document.querySelectorAll('.admin-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        this.switchTab(tab.dataset.tab);
+                    });
+                });
+            }
+
+            toggleAdminPanel() {
+                const panel = document.getElementById('adminPanel');
+                panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+            }
+
+            closeAdminPanel() {
+                document.getElementById('adminPanel').style.display = 'none';
+            }
+
+            switchTab(tabName) {
+                // Update tab buttons
+                document.querySelectorAll('.admin-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+                // Update tab content
+                document.querySelectorAll('.admin-tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+
+                // Load tab-specific data
+                if (tabName === 'analytics') {
+                    loadAnalytics();
+                }
+            }
+        }
+
+        // Analytics Functions
+        function loadAnalytics() {
+            try {
+                if (typeof window.analytics === 'undefined') {
+                    document.getElementById('analyticsStats').innerHTML = '<div class="error">Analytics not initialized. Please visit the main portfolio page first.</div>';
+                    document.getElementById('recentActivity').innerHTML = '<div class="error">Analytics not initialized.</div>';
+                    return;
+                }
+                
+                const analyticsData = window.analytics.getAnalyticsData();
+                displayAnalyticsStats(analyticsData);
+                displayRecentActivity(analyticsData.recent_events);
+                
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+                document.getElementById('analyticsStats').innerHTML = '<div class="error">Failed to load analytics data</div>';
+                document.getElementById('recentActivity').innerHTML = '<div class="error">Failed to load recent activity</div>';
+            }
+        }
+
+        function displayAnalyticsStats(stats) {
+            const statsGrid = document.getElementById('analyticsStats');
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_page_views || 0}</div>
+                    <div class="stat-label">📄 Page Views</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_resume_downloads || 0}</div>
+                    <div class="stat-label">📥 Resume Downloads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.unique_sessions || 0}</div>
+                    <div class="stat-label">👥 Unique Sessions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_form_submissions || 0}</div>
+                    <div class="stat-label">📝 Form Submissions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_external_clicks || 0}</div>
+                    <div class="stat-label">🔗 External Clicks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_project_interactions || 0}</div>
+                    <div class="stat-label">🎯 Project Interactions</div>
+                </div>
+            `;
+        }
+
+        function displayRecentActivity(activities) {
+            const activityContainer = document.getElementById('recentActivity');
+            
+            if (!activities || activities.length === 0) {
+                activityContainer.innerHTML = '<div class="info">No recent activity. Visit your portfolio pages to start tracking!</div>';
+                return;
+            }
+            
+            const activityHTML = activities.reverse().map(activity => `
+                <div class="activity-item">
+                    <div class="activity-type">${getActivityTypeLabel(activity.event_type)}</div>
+                    <div class="activity-details">${getActivityDetails(activity)}</div>
+                    <div class="activity-time">${formatTime(activity.timestamp)}</div>
+                </div>
+            `).join('');
+            
+            activityContainer.innerHTML = activityHTML;
+        }
+
+        function getActivityTypeLabel(type) {
+            const labels = {
+                'page_view': '👁️ View',
+                'resume_download': '📥 Download',
+                'form_submission': '📝 Form',
+                'external_link_click': '🔗 Link',
+                'project_interaction': '🎯 Project',
+                'scroll_depth': '📜 Scroll',
+                'time_on_page': '⏱️ Time',
+                'page_load': '🚀 Load',
+                'page_exit': '👋 Exit'
+            };
+            return labels[type] || type;
+        }
+
+        function getActivityDetails(activity) {
+            const data = activity.data;
+            switch (activity.event_type) {
+                case 'page_view':
+                    return `Page viewed: ${data.title || 'Unknown'}`;
+                case 'resume_download':
+                    return `Resume downloaded from: ${data.url || 'Unknown page'}`;
+                case 'form_submission':
+                    return `Form submitted: ${data.form_type || 'Unknown form'}`;
+                case 'external_link_click':
+                    return `External link clicked: ${data.url || 'Unknown link'}`;
+                case 'project_interaction':
+                    return `Project interaction: ${data.action || 'Unknown action'}`;
+                case 'scroll_depth':
+                    return `Scrolled ${data.depth}% of page`;
+                case 'time_on_page':
+                    return `Spent ${data.time_seconds}s on page`;
+                case 'page_load':
+                    return `Page loaded in ${Math.round(data.load_time)}ms`;
+                case 'page_exit':
+                    return `Spent ${Math.round(data.active_time/1000)}s actively on page`;
+                default:
+                    return `Event: ${activity.event_type}`;
+            }
+        }
+
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return 'Just now';
+            if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
+            if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
+            return date.toLocaleDateString();
+        }
+
+        function exportAnalytics() {
+            if (typeof window.analytics !== 'undefined') {
+                window.analytics.exportData();
+            } else {
+                alert('Analytics not initialized. Please visit the main portfolio page first.');
+            }
+        }
+
+        function clearAnalytics() {
+            if (confirm('Are you sure you want to clear all analytics data? This action cannot be undone.')) {
+                if (typeof window.analytics !== 'undefined') {
+                    window.analytics.clearData();
+                    loadAnalytics();
+                    alert('Analytics data cleared successfully.');
+                } else {
+                    alert('Analytics not initialized.');
+                }
+            }
+        }
+
+        // YouTube Management Functions
+        function updateYouTubeSettings() {
+            const channelUrl = document.getElementById('channelUrl').value;
+            const description = document.getElementById('channelDescription').value;
+            const featuredVideos = document.getElementById('featuredVideos').value;
+            
+            // Save to localStorage
+            localStorage.setItem('youtube_settings', JSON.stringify({
+                channelUrl,
+                description,
+                featuredVideos: featuredVideos.split(',').map(id => id.trim())
+            }));
+            
+            alert('YouTube settings saved successfully!');
+        }
+
+        function refreshChannelData() {
+            // This would typically call YouTube API
+            alert('Channel data refreshed! (This would call YouTube API in a real implementation)');
+        }
+
+        function updateAdminPassword() {
+            const newPassword = document.getElementById('adminPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                alert('Password must be at least 6 characters long!');
+                return;
+            }
+            
+            // In a real implementation, you'd hash this password
+            alert('Password updated successfully! (Note: In production, this should be hashed and stored securely)');
+            
+            // Clear form
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                adminPanel.logout();
+            }
+        }
+
+        // Initialize admin panel
+        const adminPanel = new AdminPanel();
+
+        // Auto-refresh analytics every 30 seconds when admin panel is open
+        setInterval(() => {
+            if (document.getElementById('adminPanel').style.display === 'block') {
+                loadAnalytics();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
