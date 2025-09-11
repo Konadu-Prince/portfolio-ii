@@ -556,7 +556,8 @@
                 <h2>📊 Portfolio Analytics</h2>
                 <div class="admin-controls">
                     <button class="btn" onclick="loadAnalytics()">🔄 Refresh Data</button>
-                    <button class="btn btn-secondary" onclick="exportAnalytics()">📥 Export Data</button>
+                    <button class="btn btn-secondary" onclick="exportAnalyticsCSV()">📊 Export CSV (Excel)</button>
+                    <button class="btn btn-secondary" onclick="exportAnalytics()">📥 Export JSON</button>
                     <button class="btn btn-danger" onclick="clearAnalytics()">🗑️ Clear Data</button>
                 </div>
                 
@@ -707,8 +708,8 @@
     </footer>
 
     <!-- Scripts -->
-    <!-- Analytics Script -->
-    <script src="analytics-github-pages.js"></script>
+    <!-- Enhanced Analytics Script -->
+    <script src="analytics-enhanced.js"></script>
     
     <!-- YouTube Showcase Script -->
     <script>
@@ -1061,6 +1062,14 @@
         function exportAnalytics() {
             if (typeof window.analytics !== 'undefined') {
                 window.analytics.exportData();
+            } else {
+                alert('Analytics not initialized. Please visit the main portfolio page first.');
+            }
+        }
+
+        function exportAnalyticsCSV() {
+            if (typeof window.analytics !== 'undefined') {
+                window.analytics.exportDataAsCSV();
             } else {
                 alert('Analytics not initialized. Please visit the main portfolio page first.');
             }
