@@ -709,7 +709,119 @@
     <!-- Scripts -->
     <!-- Analytics Script -->
     <script src="analytics-github-pages.js"></script>
-    <script src="youtube-showcase.js"></script>
+    
+    <!-- YouTube Showcase Script -->
+    <script>
+        // YouTube Channel Data Management
+        class YouTubeShowcase {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.loadChannelData();
+                this.loadFeaturedVideos();
+                this.setupEventListeners();
+            }
+
+            loadChannelData() {
+                // Load saved settings or use defaults
+                const savedSettings = localStorage.getItem('youtube_settings');
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    // Update UI with saved settings
+                    if (document.getElementById('channelUrl')) {
+                        document.getElementById('channelUrl').value = settings.channelUrl || 'https://youtube.com/@panisowanimations';
+                    }
+                    if (document.getElementById('channelDescription')) {
+                        document.getElementById('channelDescription').value = settings.description || 'Educational content about AI basics, cybersecurity tips, technology insights, and software development tutorials. Making complex topics accessible to everyone.';
+                    }
+                    if (document.getElementById('featuredVideos')) {
+                        document.getElementById('featuredVideos').value = settings.featuredVideos ? settings.featuredVideos.join(', ') : 'dQw4w9WgXcQ,abc123,def456';
+                    }
+                }
+            }
+
+            loadFeaturedVideos() {
+                const videosGrid = document.getElementById('videosGrid');
+                if (!videosGrid) return;
+
+                // Sample featured videos - in a real implementation, these would come from YouTube API
+                const featuredVideos = [
+                    {
+                        id: 'dQw4w9WgXcQ',
+                        title: 'AI Basics: Introduction to Machine Learning',
+                        description: 'Learn the fundamentals of machine learning and artificial intelligence.',
+                        thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+                        duration: '10:30'
+                    },
+                    {
+                        id: 'abc123',
+                        title: 'Cybersecurity Tips for Beginners',
+                        description: 'Essential security practices to protect your digital life.',
+                        thumbnail: 'https://img.youtube.com/vi/abc123/maxresdefault.jpg',
+                        duration: '8:45'
+                    },
+                    {
+                        id: 'def456',
+                        title: 'Web Development Tutorial Series',
+                        description: 'Complete guide to modern web development practices.',
+                        thumbnail: 'https://img.youtube.com/vi/def456/maxresdefault.jpg',
+                        duration: '15:20'
+                    }
+                ];
+
+                videosGrid.innerHTML = featuredVideos.map(video => `
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                            <div class="video-duration">${video.duration}</div>
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">${video.title}</h3>
+                            <p class="video-description">${video.description}</p>
+                            <a href="https://youtube.com/watch?v=${video.id}" class="video-link" target="_blank">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            setupEventListeners() {
+                // Mobile menu toggle
+                const hamburger = document.querySelector('.hamburger');
+                const navMenu = document.querySelector('.nav-menu');
+                
+                if (hamburger && navMenu) {
+                    hamburger.addEventListener('click', () => {
+                        hamburger.classList.toggle('active');
+                        navMenu.classList.toggle('active');
+                    });
+                }
+
+                // Close mobile menu when clicking on a link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        const hamburger = document.querySelector('.hamburger');
+                        const navMenu = document.querySelector('.nav-menu');
+                        if (hamburger && navMenu) {
+                            hamburger.classList.remove('active');
+                            navMenu.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        }
+
+        // Initialize YouTube showcase when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new YouTubeShowcase();
+        });
+    </script>
     
     <!-- Admin Panel Script -->
     <script>
