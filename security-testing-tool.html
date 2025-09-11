@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 Cybersecurity Testing Tool - Data Collection Techniques</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .technique {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .technique h3 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+        }
+        
+        .btn-success:hover {
+            background: #229954;
+        }
+        
+        .results {
+            background: #ecf0f1;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .protection {
+            background: #d5f4e6;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .protection h3 {
+            color: #27ae60;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .data-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .data-card h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status.vulnerable {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .status.protected {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .status.warning {
+            background: #f39c12;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 Cybersecurity Testing Tool</h1>
+            <p>Educational demonstration of data collection techniques and protection methods</p>
+        </div>
+        
+        <div class="warning">
+            ⚠️ <strong>Educational Purpose Only:</strong> This tool demonstrates security vulnerabilities for learning purposes. 
+            Only use these techniques on systems you own or have explicit permission to test.
+        </div>
+        
+        <div class="section">
+            <h2>🎯 Data Collection Techniques</h2>
+            
+            <div class="technique">
+                <h3>1. Browser Fingerprinting</h3>
+                <p>Creates unique identifiers based on browser characteristics.</p>
+                <div class="code-block">
+// Canvas Fingerprinting
+function getCanvasFingerprint() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillText('Fingerprint', 2, 2);
+    return canvas.toDataURL();
+}
+
+// WebGL Fingerprinting  
+function getWebGLFingerprint() {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl');
+    return gl.getParameter(gl.RENDERER) + gl.getParameter(gl.VENDOR);
+}
+                </div>
+                <button class="btn" onclick="testFingerprinting()">Test Fingerprinting</button>
+                <div id="fingerprint-results" class="results" style="display: none;"></div>
+            </div>
+            
+            <div class="technique">
+                <h3>2. IP Address Collection</h3>
+                <p>Multiple methods to obtain user's IP address without consent.</p>
+                <div class="code-block">
+// Method 1: External API
+async function getIP() {
+    const response = await fetch('https://api.ipify.org?format=json');
+    return await response.json();
+}
+
+// Method 2: WebRTC Leak
+function getWebRTCIP() {
+    const pc = new RTCPeerConnection({iceServers:[]});
+    pc.createDataChannel("");
+    pc.createOffer().then(offer => pc.setLocalDescription(offer));
+    // IP will be in SDP
+}
+                </div>
+                <button class="btn" onclick="testIPCollection()">Test IP Collection</button>
+                <div id="ip-results" class="results" style="display: none;"></div>
+            </div>
+            
+            <div class="technique">
+                <h3>3. Device Information Harvesting</h3>
+                <p>Collects comprehensive device and browser information.</p>
+                <div class="code-block">
+function harvestDeviceInfo() {
+    return {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language,
+        screen: `${screen.width}x${screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        plugins: Array.from(navigator.plugins).map(p => p.name),
+        hardware: navigator.hardwareConcurrency,
+        memory: navigator.deviceMemory
+    };
+}
+                </div>
+                <button class="btn" onclick="testDeviceHarvesting()">Test Device Harvesting</button>
+                <div id="device-results" class="results" style="display: none;"></div>
+            </div>
+            
+            <div class="technique">
+                <h3>4. Behavioral Tracking</h3>
+                <p>Monitors user behavior patterns without consent.</p>
+                <div class="code-block">
+// Mouse tracking
+document.addEventListener('mousemove', (e) => {
+    sendData('mouse', {x: e.clientX, y: e.clientY});
+});
+
+// Keystroke timing
+let lastKeyTime = Date.now();
+document.addEventListener('keydown', (e) => {
+    const timing = Date.now() - lastKeyTime;
+    sendData('keystroke', {key: e.key, timing});
+    lastKeyTime = Date.now();
+});
+                </div>
+                <button class="btn" onclick="testBehavioralTracking()">Test Behavioral Tracking</button>
+                <div id="behavior-results" class="results" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🛡️ Protection Methods</h2>
+            
+            <div class="technique protection">
+                <h3>Browser Extensions</h3>
+                <ul>
+                    <li><strong>uBlock Origin:</strong> Blocks tracking scripts</li>
+                    <li><strong>Privacy Badger:</strong> Prevents fingerprinting</li>
+                    <li><strong>Canvas Blocker:</strong> Prevents canvas fingerprinting</li>
+                    <li><strong>WebRTC Leak Prevent:</strong> Blocks IP leaks</li>
+                </ul>
+            </div>
+            
+            <div class="technique protection">
+                <h3>Browser Settings</h3>
+                <ul>
+                    <li><strong>Disable JavaScript:</strong> Prevents most tracking</li>
+                    <li><strong>Block Third-party Cookies:</strong> Limits cross-site tracking</li>
+                    <li><strong>Disable WebRTC:</strong> Prevents IP leaks</li>
+                    <li><strong>Use Private/Incognito Mode:</strong> Limits data collection</li>
+                </ul>
+            </div>
+            
+            <div class="technique protection">
+                <h3>Network Protection</h3>
+                <ul>
+                    <li><strong>VPN:</strong> Masks real IP address</li>
+                    <li><strong>Tor Browser:</strong> Anonymous browsing</li>
+                    <li><strong>DNS over HTTPS:</strong> Encrypts DNS queries</li>
+                    <li><strong>Ad Blockers:</strong> Block tracking networks</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📊 Your Current Protection Status</h2>
+            <div class="data-grid" id="protection-status">
+                <!-- Protection status will be populated here -->
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🧪 Test All Techniques</h2>
+            <button class="btn btn-success" onclick="runAllTests()">Run Complete Security Test</button>
+            <div id="complete-results" class="results" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Test Functions
+        function testFingerprinting() {
+            const results = document.getElementById('fingerprint-results');
+            results.style.display = 'block';
+            results.innerHTML = '<h4>Fingerprinting Results:</h4>';
+            
+            // Canvas fingerprint
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.textBaseline = 'top';
+                ctx.font = '14px Arial';
+                ctx.fillText('Fingerprint', 2, 2);
+                const canvasFingerprint = canvas.toDataURL().slice(-50);
+                results.innerHTML += `<p><strong>Canvas Fingerprint:</strong> ${canvasFingerprint}</p>`;
+            } catch (e) {
+                results.innerHTML += `<p><strong>Canvas Fingerprint:</strong> Blocked</p>`;
+            }
+            
+            // WebGL fingerprint
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (gl) {
+                    const renderer = gl.getParameter(gl.RENDERER);
+                    const vendor = gl.getParameter(gl.VENDOR);
+                    results.innerHTML += `<p><strong>WebGL Fingerprint:</strong> ${vendor} - ${renderer}</p>`;
+                } else {
+                    results.innerHTML += `<p><strong>WebGL Fingerprint:</strong> Not available</p>`;
+                }
+            } catch (e) {
+                results.innerHTML += `<p><strong>WebGL Fingerprint:</strong> Blocked</p>`;
+            }
+            
+            // Font detection
+            const fonts = ['Arial', 'Helvetica', 'Times New Roman', 'Courier New', 'Verdana'];
+            const availableFonts = fonts.filter(font => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.font = '12px monospace';
+                const baseline = ctx.measureText('test').width;
+                ctx.font = `12px ${font}, monospace`;
+                return ctx.measureText('test').width !== baseline;
+            });
+            results.innerHTML += `<p><strong>Available Fonts:</strong> ${availableFonts.join(', ')}</p>`;
+        }
+        
+        async function testIPCollection() {
+            const results = document.getElementById('ip-results');
+            results.style.display = 'block';
+            results.innerHTML = '<h4>IP Collection Results:</h4>';
+            
+            // Method 1: External API
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                results.innerHTML += `<p><strong>IP Address (API):</strong> ${data.ip}</p>`;
+            } catch (e) {
+                results.innerHTML += `<p><strong>IP Address (API):</strong> Blocked by browser/extension</p>`;
+            }
+            
+            // Method 2: WebRTC test
+            try {
+                const pc = new RTCPeerConnection({iceServers:[]});
+                pc.createDataChannel("");
+                pc.createOffer().then(offer => pc.setLocalDescription(offer));
+                results.innerHTML += `<p><strong>WebRTC:</strong> Enabled (potential IP leak)</p>`;
+            } catch (e) {
+                results.innerHTML += `<p><strong>WebRTC:</strong> Blocked</p>`;
+            }
+        }
+        
+        function testDeviceHarvesting() {
+            const results = document.getElementById('device-results');
+            results.style.display = 'block';
+            results.innerHTML = '<h4>Device Information:</h4>';
+            
+            const deviceInfo = {
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                screen: `${screen.width}x${screen.height}`,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                plugins: Array.from(navigator.plugins).map(p => p.name),
+                hardware: navigator.hardwareConcurrency,
+                memory: navigator.deviceMemory
+            };
+            
+            Object.entries(deviceInfo).forEach(([key, value]) => {
+                results.innerHTML += `<p><strong>${key}:</strong> ${value}</p>`;
+            });
+        }
+        
+        function testBehavioralTracking() {
+            const results = document.getElementById('behavior-results');
+            results.style.display = 'block';
+            results.innerHTML = '<h4>Behavioral Tracking Test:</h4>';
+            
+            let mouseEvents = 0;
+            let keyEvents = 0;
+            
+            const mouseHandler = (e) => {
+                mouseEvents++;
+                results.innerHTML = `<p><strong>Mouse Events Captured:</strong> ${mouseEvents}</p>`;
+            };
+            
+            const keyHandler = (e) => {
+                keyEvents++;
+                results.innerHTML += `<p><strong>Keystroke Events Captured:</strong> ${keyEvents}</p>`;
+            };
+            
+            document.addEventListener('mousemove', mouseHandler);
+            document.addEventListener('keydown', keyHandler);
+            
+            results.innerHTML += '<p><strong>Tracking Active:</strong> Move your mouse and type to see events captured</p>';
+            results.innerHTML += '<p><em>Note: This demonstrates how behavior can be tracked without consent</em></p>';
+            
+            // Stop tracking after 10 seconds
+            setTimeout(() => {
+                document.removeEventListener('mousemove', mouseHandler);
+                document.removeEventListener('keydown', keyHandler);
+                results.innerHTML += '<p><strong>Tracking Stopped</strong></p>';
+            }, 10000);
+        }
+        
+        function checkProtectionStatus() {
+            const statusGrid = document.getElementById('protection-status');
+            const protections = [
+                {
+                    name: 'Canvas Fingerprinting',
+                    test: () => {
+                        try {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            ctx.fillText('test', 0, 0);
+                            return 'vulnerable';
+                        } catch (e) {
+                            return 'protected';
+                        }
+                    }
+                },
+                {
+                    name: 'WebGL Fingerprinting',
+                    test: () => {
+                        try {
+                            const canvas = document.createElement('canvas');
+                            const gl = canvas.getContext('webgl');
+                            return gl ? 'vulnerable' : 'protected';
+                        } catch (e) {
+                            return 'protected';
+                        }
+                    }
+                },
+                {
+                    name: 'Font Detection',
+                    test: () => {
+                        try {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            ctx.font = '12px Arial';
+                            ctx.measureText('test');
+                            return 'vulnerable';
+                        } catch (e) {
+                            return 'protected';
+                        }
+                    }
+                },
+                {
+                    name: 'Plugin Detection',
+                    test: () => navigator.plugins.length > 0 ? 'vulnerable' : 'protected'
+                },
+                {
+                    name: 'Screen Resolution',
+                    test: () => screen.width > 0 ? 'vulnerable' : 'protected'
+                },
+                {
+                    name: 'Timezone Detection',
+                    test: () => {
+                        try {
+                            Intl.DateTimeFormat().resolvedOptions().timeZone;
+                            return 'vulnerable';
+                        } catch (e) {
+                            return 'protected';
+                        }
+                    }
+                }
+            ];
+            
+            statusGrid.innerHTML = protections.map(protection => {
+                const status = protection.test();
+                return `
+                    <div class="data-card">
+                        <h4>${protection.name}</h4>
+                        <span class="status ${status}">${status.toUpperCase()}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function runAllTests() {
+            const results = document.getElementById('complete-results');
+            results.style.display = 'block';
+            results.innerHTML = '<h4>Complete Security Test Results:</h4>';
+            
+            // Run all tests
+            testFingerprinting();
+            testIPCollection();
+            testDeviceHarvesting();
+            testBehavioralTracking();
+            
+            results.innerHTML += '<p><strong>All tests completed. Check individual sections above for detailed results.</strong></p>';
+            results.innerHTML += '<p><em>This demonstrates how much data can be collected without user consent.</em></p>';
+        }
+        
+        // Initialize protection status check
+        document.addEventListener('DOMContentLoaded', () => {
+            checkProtectionStatus();
+        });
+    </script>
+</body>
+</html>
